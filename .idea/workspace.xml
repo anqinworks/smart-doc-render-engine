@@ -4,47 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DocConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/HtmlConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/ex/DocumentException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/ElderlySubsidyApplicationDataGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/MinimumLivingAllowanceApprovalFormSimulationData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiCityFamilyPlanningRewardReturnProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiCityMarriageChildbearingSituationExplanationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiDisabilityLivingAndCareSubsidyApprovalTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiMinimumLivingPledgeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiSpecialDifficultySupportApplicationFormTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiUrbanRuralLivingGuaranteeFormTestDataGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/WordTemplateProcessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/DynamicListModifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/TemplateUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/VariableUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFillerFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/annotation/CompileValidatedPlaceholder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/annotation/Placeholder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/enums/PlaceholderType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/DynamicRowPlaceholderFiller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/SIMSUN.TTC" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/STSONG.TTF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-仿宋_常规.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-宋体_常规.ttc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-楷体_GB2312.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-楷体_常规.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-黑体_常规.ttf" afterDir="false" />
-    </list>
+    <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,6 +21,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/anqinworks/smart-doc-render-engine.git",
+    "accountId": "94286a07-3d07-4cd8-bf61-62f2ba5e94dd"
+  }
+}]]></component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="true" />
   </component>
@@ -99,7 +65,7 @@
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.3",
-    "settings.editor.selected.configurable": "MavenSettings",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true",
     "应用程序.DocConverter.executor": "Run"
   }
@@ -150,7 +116,7 @@
       <option name="presentableId" value="Default" />
       <updated>1755434772304</updated>
       <workItem from="1755434773438" duration="4144000" />
-      <workItem from="1755505997954" duration="4002000" />
+      <workItem from="1755505997954" duration="9714000" />
     </task>
     <servers />
   </component>
@@ -160,5 +126,9 @@
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
