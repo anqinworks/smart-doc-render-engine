@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DocConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/HtmlConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/ex/DocumentException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/ElderlySubsidyApplicationDataGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/MinimumLivingAllowanceApprovalFormSimulationData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiCityFamilyPlanningRewardReturnProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiCityMarriageChildbearingSituationExplanationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiDisabilityLivingAndCareSubsidyApprovalTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiMinimumLivingPledgeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiSpecialDifficultySupportApplicationFormTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiUrbanRuralLivingGuaranteeFormTestDataGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/WordTemplateProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/DynamicListModifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/TemplateUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/VariableUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFillerFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/annotation/CompileValidatedPlaceholder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/annotation/Placeholder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/enums/PlaceholderType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/DynamicRowPlaceholderFiller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/SIMSUN.TTC" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/STSONG.TTF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-仿宋_常规.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-宋体_常规.ttc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-楷体_GB2312.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-楷体_常规.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fonts/truetype/字体文件-黑体_常规.ttf" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Exception" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="31PnrFtMK5alNbhNcEAGW9citLD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/workspace/smart-doc-render-engine/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.3",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.DocConverter.executor": "Run"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cc.anqin.doc.convert.strategy" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\workspace\smart-doc-render-engine\src\main\resources" />
+      <recent name="C:\workspace\smart-doc-render-engine" />
+      <recent name="C:\workspace\smart-doc-render-engine\src\main\java\cc\anqin\doc" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="DocConverter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.strategy.DocConverter" />
+      <module name="smart-doc-render-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cc.anqin.doc.convert.strategy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.DocConverter" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.23892.409" />
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-IU-252.23892.409" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="" />
+      <created>1755434772304</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755434772304</updated>
+      <workItem from="1755434773438" duration="4144000" />
+      <workItem from="1755505997954" duration="4002000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>false</integration-enabled>
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
