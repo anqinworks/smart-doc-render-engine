@@ -82,7 +82,7 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
      * 填充文档中的占位符，包括动态表格和普通文本。
      */
     @Override
-    public PlaceholderFillerService process() {
+    public void filler() {
 
         // 处理每个字段
         for (Field field : fields) {
@@ -101,7 +101,6 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
                 throw new DocumentException("Expected a List for field " + field.getName());
             }
         }
-        return this;
     }
 
     /**

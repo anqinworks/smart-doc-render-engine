@@ -1,14 +1,10 @@
 package cc.anqin.doc.word.placeholder;
 
 import cc.anqin.doc.entity.AsposePlaceholder;
-import cn.hutool.core.util.StrUtil;
 import com.aspose.words.Document;
-import com.aspose.words.FindReplaceOptions;
-import com.aspose.words.Range;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
-import java.util.Map;
 
 /**
  * 占位符填充服务
@@ -29,11 +25,9 @@ public interface PlaceholderFillerService {
 
 
     /**
-     * 过程
-     *
-     * @return {@link PlaceholderFillerService }
+     * 填充
      */
-    <T extends AsposePlaceholder> PlaceholderFillerService process();
+    void filler();
 
 
     /**

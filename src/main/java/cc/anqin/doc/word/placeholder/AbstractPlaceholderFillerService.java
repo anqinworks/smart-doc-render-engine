@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -88,7 +87,7 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      * 处理
      */
     @Override
-    public abstract PlaceholderFillerService process();
+    public abstract void filler();
 
 
     /**
@@ -99,20 +98,5 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      */
     protected String placeholderText(String text) {
         return String.format("%s%s%s", entity.getPrefix(), text, entity.getSuffix());
-    }
-
-
-    /**
-     * 获取字段
-     *
-     * @param entity 实体
-     * @return {@link Set }<{@link Field }>
-     */
-    protected <T extends AsposePlaceholder> Set<Field> vGetFields(Document doc, T entity) {
-
-        if (doc == null || entity == null) {
-            return Collections.emptySet();
-        }
-        return CollUtil.newHashSet(ReflectUtil.getFields(entity.getClass()));
     }
 }

@@ -28,11 +28,6 @@ public class FileUtils {
 
 
     /**
-     * 文件类型
-     */
-    public static final String FILE_TYPE = "png";
-
-    /**
      * 临时路径
      */
     public static final String TEMP_PATH = FileUtil.getTmpDir().getAbsolutePath();

@@ -7,7 +7,6 @@ import cc.anqin.doc.word.placeholder.DynamicRowPlaceholderFiller;
 import cc.anqin.doc.word.placeholder.ImagePlaceholderFiller;
 import cc.anqin.doc.word.placeholder.PlaceholderFillerService;
 import cc.anqin.doc.word.placeholder.TextPlaceholderFiller;
-import cc.anqin.processor.base.ConvertMap;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.io.FileUtil;
@@ -19,13 +18,11 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 
 /**
  * 单词模板占位符填充工厂
@@ -38,6 +35,14 @@ import java.util.Set;
 public class PlaceholderFactory {
 
 
+    /**
+     * 填充模板
+     *
+     * @param source 源
+     * @param templateFile 模板文件
+     * @param outputFile 输出文件
+     * @return {@link Pair }<{@link File }, {@link File }>
+     */
     public <T extends AsposePlaceholder> Pair<File, File> fillTemplate(T source, File templateFile, File outputFile) {
         Pair<File, File> pair = fillTemplate(source, templateFile);
         FileUtil.copy(pair.getValue(), outputFile, false);
@@ -54,7 +59,6 @@ public class PlaceholderFactory {
      * @return {@link Pair }<{@link File }, {@link File }> key 作为 docx 模板记录，value 作为 要转换的 PDF 文件
      */
     public <T extends AsposePlaceholder> Pair<File, File> fillTemplate(T source, File templateFile) {
-        Map<String, Object> targetMap = ConvertMap.toMap(source, source.getClass());
 
         File templateRecord = FileUtils.getTemporaryFile(String.format("-random-%s.docx", RandomUtil.randomNumbers(5)));
 
@@ -72,7 +76,6 @@ public class PlaceholderFactory {
 
             doc.save(Files.newOutputStream(templateRecord.toPath()), SaveFormat.DOCX);
             log.info("用户:{} 文档记录生成成功：{}", source.getFileName(), templateRecord.getAbsolutePath());
-
 
             // 清除变量
             Document docClearVariable = doc(templateRecord);
@@ -110,7 +113,7 @@ public class PlaceholderFactory {
      */
     private <T extends AsposePlaceholder> void
     parallelExecuteStrategy(Document doc, T entity) {
-        getStrategy().parallelStream().forEach(filler -> filler.create(doc, entity).process());
+        getStrategy().parallelStream().forEach(filler -> filler.create(doc, entity).filler());
     }
 
     /**

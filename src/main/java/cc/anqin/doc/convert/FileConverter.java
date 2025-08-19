@@ -1,6 +1,10 @@
 package cc.anqin.doc.convert;
 
+import cn.hutool.core.util.ObjUtil;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.File;
+import java.util.Set;
 
 /**
  * 文件转换器
@@ -23,12 +27,33 @@ public interface FileConverter {
 
 
     /**
+     * 获取支持文件类型
+     *
+     * @return {@link Set }<{@link FileType }>
+     */
+    Set<FileType> getSupports();
+
+
+    /**
+     * 获取目标类型
+     *
+     * @return {@link FileType }
+     */
+    FileType getTargetType();
+
+    /**
      * 是否支持文件
      *
-     * @param fileType 文件类型
+     * @param source 源文件类型
+     * @param target 目标文件类型
      * @return boolean
      */
-    boolean supports(String fileType);
+    default boolean supports(FileType source, FileType target) {
+        if (ObjUtil.hasNull(source, target)) {
+            return false;
+        }
+        return getSupports().contains(source) && getTargetType().equals(target);
+    }
 
 
     /**

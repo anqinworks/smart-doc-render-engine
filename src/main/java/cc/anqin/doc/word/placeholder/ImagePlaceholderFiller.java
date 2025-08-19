@@ -35,7 +35,7 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
      * 处理图片占位符插入
      */
     @Override
-    public PlaceholderFillerService process() {
+    public void filler() {
 
         DocumentBuilder documentBuilder = Opt.ofTry(() -> new DocumentBuilder(doc))
                 .orElseThrow(() -> new DocumentException("Failed to create DocumentBuilder"));
@@ -66,7 +66,6 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
                 throw new DocumentException("插入图片占位符失败: " + placeholderText + ExceptionUtil.stacktraceToString(e));
             }
         }
-        return this;
     }
 
     /**

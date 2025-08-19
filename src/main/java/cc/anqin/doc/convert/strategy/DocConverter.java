@@ -1,13 +1,15 @@
 package cc.anqin.doc.convert.strategy;
 
 import cc.anqin.doc.convert.AbstractFileConverter;
+import cc.anqin.doc.convert.FileType;
 import cc.anqin.doc.ex.DocumentException;
 import cc.anqin.doc.utils.FileUtils;
-import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.core.collection.CollUtil;
 import com.aspose.words.*;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * doc转换器
@@ -52,9 +54,12 @@ public class DocConverter extends AbstractFileConverter {
                 pageSetup.setPageHeight(convertMmToPoints(height));
             }
 
+
             // 设置 PDF 转换选项
             PdfSaveOptions saveOptions = new PdfSaveOptions();
             saveOptions.setEmbedFullFonts(true);  // 确保字体嵌入 PDF
+            saveOptions.setSaveFormat(SaveFormat.PDF);
+            saveOptions.setPrettyFormat(true);
 
             // 保存为 PDF
             doc.save(outputFile.getAbsolutePath(), saveOptions);
@@ -68,24 +73,22 @@ public class DocConverter extends AbstractFileConverter {
     }
 
     /**
-     * 将 mm 转换为点
+     * 获取支持文件类型
      *
-     * @param mm 毫米
-     * @return double
-     */
-    private double convertMmToPoints(int mm) {
-        return mm * 2.83464567; // 1 毫米 ≈ 2.83464567 点
-    }
-
-
-    /**
-     * 是否支持文件
-     *
-     * @param fileType 文件类型
-     * @return boolean
+     * @return {@link Set }<{@link FileType }>
      */
     @Override
-    public boolean supports(String fileType) {
-        return "doc".equalsIgnoreCase(fileType) || "docx".equalsIgnoreCase(fileType);
+    public Set<FileType> getSupports() {
+        return Collections.unmodifiableSet(CollUtil.newHashSet(FileType.DOC, FileType.DOCX));
+    }
+
+    /**
+     * 获取目标类型
+     *
+     * @return {@link FileType }
+     */
+    @Override
+    public FileType getTargetType() {
+        return FileType.PDF;
     }
 }

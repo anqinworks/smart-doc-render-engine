@@ -15,7 +15,7 @@ import java.io.File;
  */
 @Setter
 @Getter
-public class AbstractFileConverter implements FileConverter {
+public abstract class AbstractFileConverter implements FileConverter {
 
 
     /** 字体路径 */
@@ -30,20 +30,10 @@ public class AbstractFileConverter implements FileConverter {
      * @return {@link File }
      */
     @Override
-    public File convert(File inputFile, int width, int height) throws Exception {
+    public File convert(File inputFile, int width, int height) {
         return null;
     }
 
-    /**
-     * 是否支持文件
-     *
-     * @param fileType 文件类型
-     * @return boolean
-     */
-    @Override
-    public boolean supports(String fileType) {
-        return false;
-    }
 
     /**
      * 获取字体路径
@@ -54,5 +44,16 @@ public class AbstractFileConverter implements FileConverter {
     public String getFontsPath() {
         return Opt.ofBlankAble(this.fontsPath)
                 .orElse(new ClassPathResource("fonts/truetype").getAbsolutePath());
+    }
+
+
+    /**
+     * 将 mm 转换为点
+     *
+     * @param mm 毫米
+     * @return double
+     */
+    protected static double convertMmToPoints(double mm) {
+        return mm * 72 / 25.4;
     }
 }

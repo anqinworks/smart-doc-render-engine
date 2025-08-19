@@ -28,7 +28,7 @@ public class TextPlaceholderFiller extends AbstractPlaceholderFillerService {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public PlaceholderFillerService process() {
+    public void filler() {
 
         for (Field field : fields) {
             String fieldName = field.getName();
@@ -83,7 +83,6 @@ public class TextPlaceholderFiller extends AbstractPlaceholderFillerService {
                 throw new DocumentException("替换文本占位符失败：" + placeholderText + ExceptionUtil.stacktraceToString(e));
             }
         }
-        return this;
     }
 
     /**
