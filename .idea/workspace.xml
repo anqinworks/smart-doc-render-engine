@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/UrumqiCityFamilyPlanningRewardReturn.java" afterDir="false" />
+    <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="修改部分功能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DocConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DocConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/HtmlConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/HtmlConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/DynamicRowPlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/DynamicRowPlaceholderFiller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +40,18 @@
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="true" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -72,31 +68,33 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/workspace/smart-doc-render-engine&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;应用程序.DocConverter.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.smart-doc-render-engine [clean].executor": "Run",
+    "Maven.smart-doc-render-engine [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "go.import.settings.migrated": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/workspace/smart-doc-render-engine",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.3",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true",
+    "应用程序.DocConverter.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="cc.anqin.doc.convert.strategy" />
@@ -144,7 +142,7 @@
       <updated>1755434772304</updated>
       <workItem from="1755434773438" duration="4144000" />
       <workItem from="1755505997954" duration="10044000" />
-      <workItem from="1755569059331" duration="11523000" />
+      <workItem from="1755569059331" duration="19503000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -162,7 +160,31 @@
       <option name="project" value="LOCAL" />
       <updated>1755517459834</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1755590227553</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1755590227553</updated>
+    </task>
+    <task id="LOCAL-00004" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1755590501367</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1755590501367</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1755601477662</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1755601477662</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,7 +203,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="修改部分功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改部分功能" />
   </component>
   <component name="VgoProject">
     <integration-enabled>false</integration-enabled>

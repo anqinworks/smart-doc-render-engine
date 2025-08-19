@@ -5,8 +5,10 @@ import cc.anqin.doc.utils.DynamicListModifier;
 import cc.anqin.doc.word.annotation.Placeholder;
 import cc.anqin.doc.word.enums.PlaceholderType;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.aspose.words.Document;
 import com.aspose.words.FindReplaceOptions;
 import com.aspose.words.Range;
@@ -74,6 +76,19 @@ public class TextPlaceholderFiller extends AbstractPlaceholderFillerService {
                     continue;
                 }
 
+                if( defaultValue instanceof Character || defaultValue instanceof Boolean || defaultValue instanceof Enum
+                    || defaultValue instanceof Number){
+                    if (range.getText().contains(placeholderText)) {
+                        range.replace(placeholderText, StrUtil.toString(defaultValue), new FindReplaceOptions());
+                    }
+                }
+
+                if (defaultValue instanceof Date) {
+                    if (range.getText().contains(placeholderText)) {
+                        range.replace(placeholderText, DateUtil.format((Date) defaultValue, "yyyy-MM-dd"), new FindReplaceOptions());
+                    }
+                    continue;
+                }
                 if (defaultValue instanceof String) {
                     if (range.getText().contains(placeholderText)) {
                         range.replace(placeholderText, (String) defaultValue, new FindReplaceOptions());
