@@ -6,6 +6,7 @@ import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.io.FileUtil;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class ConverterFileFactory {
                 new DocConverter(),
                 new HtmlConverter()
         );
-        CONVERTERS = ListUtil.toList(dataList);
+        CONVERTERS = Collections.unmodifiableList(dataList);
     }
 
     /**
