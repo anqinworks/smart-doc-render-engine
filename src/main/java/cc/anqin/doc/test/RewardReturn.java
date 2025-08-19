@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @AutoToMap
-public class UrumqiCityFamilyPlanningRewardReturn extends Template {
+public class RewardReturn extends Template {
 
     /**
      * 区

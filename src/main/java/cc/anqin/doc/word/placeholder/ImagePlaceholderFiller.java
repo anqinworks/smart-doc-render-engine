@@ -22,10 +22,36 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
- * 图像占位符填充物
+ * 图像占位符填充器
+ * <p>
+ * 该类是AbstractPlaceholderFillerService的具体实现，专门用于处理图像类型的占位符填充。
+ * 图像占位符支持将图片文件或图片URL插入到文档中的对应位置，并可以控制图片的尺寸和位置。
+ * </p>
+ * <p>
+ * 主要功能：
+ * <ul>
+ *   <li>图片插入 - 将图片文件或URL对应的图片插入到文档中</li>
+ *   <li>图片尺寸控制 - 支持通过注解设置图片的宽度和高度</li>
+ *   <li>多图片处理 - 支持处理图片列表，适用于需要插入多张图片的场景</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 使用示例：
+ * <pre>
+ * // 创建图像占位符填充器并绑定数据
+ * PlaceholderFillerService filler = new ImagePlaceholderFiller()
+ *     .create(document, templateData);
+ * 
+ * // 执行图像占位符填充
+ * filler.filler();
+ * </pre>
+ * </p>
  *
  * @author Mr.An
  * @date 2024/12/25
+ * @see AbstractPlaceholderFillerService 抽象占位符填充服务
+ * @see PlaceholderFillerService 占位符填充服务接口
+ * @see PlaceholderType#PIC 图像占位符类型
  */
 @Slf4j
 public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {

@@ -9,10 +9,40 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 动态列表修饰符
+ * 动态列表修饰符工具类
+ * <p>
+ * 该工具类用于处理和转换动态数据列表，主要应用于动态表格数据的格式化和规范化。
+ * 它能够将原始数据列表转换为包含表头和数据的标准格式，便于在文档模板中进行动态表格的生成。
+ * </p>
+ * <p>
+ * 主要功能：
+ * <ul>
+ *   <li>数据规范化 - 将原始数据列表转换为标准格式</li>
+ *   <li>表头集成 - 将表头与数据行集成在一起</li>
+ *   <li>多行数据处理 - 支持处理多行数据的转换</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 使用示例：
+ * <pre>
+ * // 原始数据
+ * List&lt;List&lt;String&gt;&gt; dataList = Arrays.asList(
+ *     Arrays.asList("胖胖", "2012-08-15", "西安"),
+ *     Arrays.asList("熙熙", "2012-08-15", "北京")
+ * );
+ * 
+ * // 表头
+ * List&lt;String&gt; headers = Arrays.asList("子女姓名", "出身日期", "地址");
+ * 
+ * // 规范化数据
+ * List&lt;List&lt;String&gt;&gt; normalizedData = DynamicListModifier.normalizeData(dataList, headers);
+ * </pre>
+ * </p>
  *
  * @author Mr.An
  * @date 2024/12/26
+ * @see cc.anqin.doc.word.placeholder.DynamicRowPlaceholderFiller 动态行占位符填充器
+ * @see cn.hutool.core.collection.CollUtil Hutool集合工具
  */
 public class DynamicListModifier {
 

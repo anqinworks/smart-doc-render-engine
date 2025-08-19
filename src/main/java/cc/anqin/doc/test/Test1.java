@@ -1,10 +1,7 @@
 package cc.anqin.doc.test;
 
 import cc.anqin.doc.FT;
-import cc.anqin.doc.convert.ConverterFileFactory;
 import cc.anqin.doc.convert.FileType;
-import cc.anqin.doc.word.PlaceholderFactory;
-import cn.hutool.core.io.FileUtil;
 
 import java.io.File;
 import java.util.Arrays;
@@ -17,8 +14,8 @@ import java.util.Arrays;
 public class Test1 {
 
     // 默认数据的构造方法
-    public static UrumqiCityFamilyPlanningRewardReturn get() {
-        UrumqiCityFamilyPlanningRewardReturn defaultData = new UrumqiCityFamilyPlanningRewardReturn();
+    public static RewardReturn get() {
+        RewardReturn defaultData = new RewardReturn();
 
         // 设置默认值
         defaultData.setDistrict("test区");
@@ -39,8 +36,8 @@ public class Test1 {
         defaultData.setBankCardNumber("622202******1234");
         defaultData.setApplyDate("2024-12-25");
         defaultData.setChildrenTable(Arrays.asList(
-                new UrumqiCityFamilyPlanningRewardReturn.ChildrenTable("胖胖","2012-08-15"),
-                new UrumqiCityFamilyPlanningRewardReturn.ChildrenTable("嘿嘿","2012-08-16")
+                new RewardReturn.ChildrenTable("胖胖","2012-08-15"),
+                new RewardReturn.ChildrenTable("嘿嘿","2012-08-16")
         ));
 
         return defaultData;
@@ -51,7 +48,7 @@ public class Test1 {
         // 输入和输出文件路径
         File templateFile = new File("/Users/anqin/Documents/company_project/新疆久领科技/山润社区/政务生成-模板文件/城镇计划生育家庭奖励金申报表.docx");
 
-        UrumqiCityFamilyPlanningRewardReturn source = get();
+        RewardReturn source = get();
 
         File file = FT.of(source, templateFile).convert(FileType.PDF);
 

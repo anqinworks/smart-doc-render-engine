@@ -18,20 +18,51 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 动态表占位符填充器
+ * 动态行占位符填充器
+ * <p>
+ * 该类是AbstractPlaceholderFillerService的具体实现，专门用于处理动态行类型的占位符填充。
+ * 动态行占位符支持将列表数据动态填充到文档表格中，适用于需要根据数据量动态生成表格行的场景。
+ * </p>
+ * <p>
+ * 主要功能：
+ * <ul>
+ *   <li>动态表格生成 - 根据数据列表动态生成表格行</li>
+ *   <li>复杂数据结构处理 - 支持处理嵌套的对象列表</li>
+ *   <li>表格样式保持 - 在动态生成行时保持原表格的样式</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 使用示例：
+ * <pre>
+ * // 创建动态行占位符填充器并绑定数据
+ * PlaceholderFillerService filler = new DynamicRowPlaceholderFiller()
+ *     .create(document, templateData);
+ * 
+ * // 执行动态行占位符填充
+ * filler.filler();
+ * </pre>
+ * </p>
  *
  * @author Mr.An
  * @date 2024/12/25
+ * @see AbstractPlaceholderFillerService 抽象占位符填充服务
+ * @see PlaceholderFillerService 占位符填充服务接口
+ * @see PlaceholderType#DYNAMIC_ROW 动态行占位符类型
  */
 @Slf4j
 public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerService {
 
 
     /**
-     * 空的，用于覆盖变量
+     * 处理空数据情况，用于覆盖文档中的变量占位符
+     * <p>
+     * 当没有实际数据需要填充时，此方法会使用空值覆盖文档中的动态行占位符，
+     * 确保文档中不会显示原始的占位符文本。
+     * </p>
      *
-     * @param doc    doc
-     * @param fields 字段数组
+     * @param doc    文档对象，要处理的Word文档
+     * @param fields 需要处理的字段数组，包含动态行占位符信息的字段
+     * @throws DocumentException 如果在处理过程中发生错误
      */
     @Override
     public void empty(Document doc, Field... fields) {
@@ -48,9 +79,14 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
 
     /**
      * 判断字段是否是 List 类型，并获取 List 中对象的所有字段
+     * <p>
+     * 此方法用于分析字段的泛型类型，如果字段是List类型，则获取List中元素类型的所有字段，
+     * 并返回一个包含这些字段名称和空值的Map。这对于动态行处理非常重要，因为它提供了
+     * 表格列的结构信息。
+     * </p>
      *
-     * @param field 领域
-     * @return {@link Map }<{@link String }, {@link Object }>
+     * @param field 要分析的字段对象
+     * @return 包含字段名称和默认空值的Map，如果字段不是List类型或无法获取泛型信息则返回空Map
      */
     public static Map<String, Object> getFieldsFromList(Field field) {
         // 判断字段是否是 List 类型
@@ -79,7 +115,13 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
     }
 
     /**
-     * 填充文档中的占位符，包括动态表格和普通文本。
+     * 填充文档中的动态行占位符
+     * <p>
+     * 此方法实现了AbstractPlaceholderFillerService中的抽象方法，用于处理文档中的动态行占位符。
+     * 它会遍历所有标记为动态行类型的字段，获取对应的数据（必须是List类型），然后将数据填充到文档的表格中。
+     * </p>
+     * 
+     * @throws DocumentException 如果字段值不是List类型或在处理过程中发生错误
      */
     @Override
     public void filler() {
@@ -104,11 +146,15 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
     }
 
     /**
-     * 处理动态表格
+     * 处理动态表格数据
+     * <p>
+     * 此方法将List类型的数据转换为Map列表，然后调用dynamicTable方法进行实际的表格填充。
+     * 如果数据列表为空，则不进行任何操作。
+     * </p>
      *
-     * @param doc 医生
-     * @param dataList 数据列表
-     * @throws Exception 例外
+     * @param doc 要处理的Word文档对象
+     * @param dataList 包含动态行数据的列表
+     * @throws Exception 如果在数据转换或表格处理过程中发生错误
      */
     private void processDynamicTable(Document doc, List<?> dataList) throws Exception {
         if (CollUtil.isEmpty(dataList)) {
@@ -132,12 +178,16 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
     }
 
     /**
-     * 动态表
+     * 动态生成表格行并填充数据
+     * <p>
+     * 此方法遍历文档中的所有表格，查找包含指定字段占位符的行，然后根据提供的数据动态生成新行并填充数据。
+     * 处理完成后，会删除原始的模板行。
+     * </p>
      *
-     * @param doc        doc
-     * @param dynamicMap 动态地图
-     * @param fields     领域
-     * @throws Exception 例外
+     * @param doc        要处理的Word文档对象
+     * @param dynamicMap 包含动态行数据的Map列表，每个Map代表一行数据
+     * @param fields     需要处理的字段名称集合，用于识别表格中的占位符
+     * @throws Exception 如果在表格处理过程中发生错误
      */
     private void dynamicTable(Document doc, List<Map<String, Object>> dynamicMap, Set<String> fields) throws Exception {
         // 遍历文档中的每个表格
@@ -167,12 +217,18 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
     }
 
     /**
-     * 按行填充单元格
+     * 按行填充单元格数据
+     * <p>
+     * 此方法根据模板行创建新行，并用提供的数据填充新行中的单元格。
+     * 它会查找单元格中包含指定字段占位符的文本，并替换为对应的数据值。
+     * </p>
      *
-     * @param table       表
-     * @param templateRow 模板行
-     * @param dataMap     资料图
-     * @throws Exception 例外
+     * @param doc         要处理的Word文档对象
+     * @param table       要处理的表格对象
+     * @param templateRow 作为模板的表格行
+     * @param fieldVariables 需要处理的字段变量集合
+     * @param dataMap     包含单行数据的Map，键为字段名，值为对应的数据
+     * @throws Exception 如果在单元格填充过程中发生错误
      */
     private void fillCellsByRow(Document doc,
                                 Table table,
@@ -198,9 +254,16 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
 
 
     /**
-     * 支持的
+     * 筛选支持的字段
+     * <p>
+     * 此方法实现了AbstractPlaceholderFillerService中的抽象方法，用于筛选出标记为DYNAMIC_ROW类型的字段。
+     * 它会检查字段是否有@Placeholder注解，以及注解的值是否为DYNAMIC_ROW类型。
+     * 如果字段标记为DYNAMIC_ROW类型但没有提供dynamicRow属性，则会抛出异常。
+     * </p>
      *
-     * @param fields@return {@link Field[] }
+     * @param fields 要筛选的字段数组
+     * @return 支持的字段数组，只包含DYNAMIC_ROW类型的字段
+     * @throws DocumentException 如果字段标记为DYNAMIC_ROW类型但缺少必要的注解属性
      */
     @Override
     public Field[] supports(Field[] fields) {

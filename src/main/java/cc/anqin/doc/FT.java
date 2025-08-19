@@ -9,19 +9,38 @@ import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.File;
 
 /**
  * 模板填充工具类 - 用于处理Aspose模板填充操作
  * <p>
- * 泛型T必须继承自AsposePlaceholder，表示模板占位符实体
- * 采用链式调用风格，支持模板填充和文件格式转换
+ * 该类是Smart Doc Render Engine的核心工具类，提供了一系列便捷方法用于文档模板的填充和转换。
+ * 泛型T必须继承自AsposePlaceholder，表示模板占位符实体。
+ * 采用链式调用风格，支持模板填充和文件格式转换，使API调用更加流畅和直观。
+ * </p>
+ * <p>
+ * 主要功能：
+ * <ul>
+ *   <li>模板变量替换 - 将模板中的占位符替换为实际数据</li>
+ *   <li>文件格式转换 - 支持将文档转换为PDF等多种格式</li>
+ *   <li>链式操作 - 支持流畅的API调用方式</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 使用示例：
+ * <pre>
+ * MyTemplate template = new MyTemplate().setName("示例文档");
+ * Pair&lt;File, File&gt; result = FT.of(template, new File("template.docx"))
+ *     .fillAndConvert();
+ * </pre>
  * </p>
  *
  * @param <T> 模板占位符实体类型，必须继承自AsposePlaceholder
  * @author Mr.An
  * @date 2025/08/19
+ * @see AsposePlaceholder 模板占位符接口
+ * @see PlaceholderFactory 占位符处理工厂
+ * @see CF 文件转换工厂
  */
 @Data
 @Accessors(chain = true)
@@ -102,6 +121,7 @@ public class FT<T extends AsposePlaceholder> {
     public File convert(FileType fileType, int width, int height) {
         return CF.create(currentFile, width, height).toFile(fileType);
     }
+
 
     /**
      * 执行模板填充核心逻辑
