@@ -2,9 +2,10 @@ package cc.anqin.doc;
 
 import cc.anqin.doc.convert.AbstractFileConverter;
 import cc.anqin.doc.convert.CF;
-import cc.anqin.doc.convert.FileType;
+import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.entity.AsposePlaceholder;
 import cc.anqin.doc.word.PlaceholderFactory;
+import cn.hutool.core.io.FileUtil;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -110,7 +111,7 @@ public class FT<T extends AsposePlaceholder> {
      * @param fileType 目标文件类型
      * @return 转换后的文件
      */
-    public File convert(FileType fileType) {
+    public File convert(DocumentFormat fileType) {
         return CF.create(currentFile).toFile(fileType);
     }
 
@@ -131,8 +132,8 @@ public class FT<T extends AsposePlaceholder> {
      * @param fileType 目标文件类型
      * @return 转换后的文件
      */
-    public File convert(FileType fileType, int width, int height) {
-        return CF.create(currentFile, width, height).toFile(fileType);
+    public File convert(DocumentFormat fileType, int width, int height) {
+        return CF.create(FileUtil.getInputStream(currentFile), width, height).toFile(fileType);
     }
 
 

@@ -27,13 +27,6 @@
         </developer>
     </developers>
 
-    <repositories>
-        <repository>
-            <id>repository.groupdocs.com</id>
-            <name>GroupDocs Repository</name>
-            <url>https://releases.groupdocs.com/java/repo/</url>
-        </repository>
-    </repositories>
 
     <scm>
         <connection>https://github.com/anqinworks/smart-doc-render-engine.git</connection>
@@ -96,11 +89,6 @@
             <groupId>io.github.anqinworks</groupId>
             <artifactId>auto-mapping-map</artifactId>
             <version>${auto-mapping-map.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.groupdocs</groupId>
-            <artifactId>groupdocs-conversion</artifactId>
-            <version>25.7</version>
         </dependency>
     </dependencies>
 

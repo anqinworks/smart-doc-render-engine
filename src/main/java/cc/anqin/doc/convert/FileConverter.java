@@ -1,9 +1,15 @@
 package cc.anqin.doc.convert;
 
+import cc.anqin.doc.utils.FileUtils;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ObjUtil;
+import com.aspose.words.Document;
+import com.aspose.words.SaveFormat;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Set;
 
 /**
@@ -32,37 +38,33 @@ import java.util.Set;
  * @date 2024/11/29
  * @see AbstractFileConverter 文件转换器抽象实现
  * @see ConverterFileFactory 转换器工厂类
- * @see FileType 文件类型枚举
+ * @see DocumentFormat 文件类型枚举
  * @see CF 文件转换工具类
  */
 public interface FileConverter {
 
 
-    /**
-     * 转换
-     *
-     * @param inputFile 输入文件
-     * @param width     宽度
-     * @param height    高度
-     * @return {@link File }
-     */
-    File convert(File inputFile, int width, int height) throws Exception;
+
+    File convert(Document doc, DocumentFormat type);
+
+
+    File convert(File outputFile, Document doc, double width, double height, DocumentFormat type);
 
 
     /**
      * 获取支持文件类型
      *
-     * @return {@link Set }<{@link FileType }>
+     * @return {@link Set }<{@link DocumentFormat }>
      */
-    Set<FileType> getSupports();
+    Set<DocumentFormat> getSupports();
 
 
     /**
      * 获取目标类型
      *
-     * @return {@link FileType }
+     * @return {@link DocumentFormat }
      */
-    FileType getTargetType();
+    DocumentFormat getTargetType();
 
     /**
      * 判断当前转换器是否支持指定的源文件类型到目标文件类型的转换
@@ -76,7 +78,7 @@ public interface FileConverter {
      * @param target 目标文件类型
      * @return 如果支持转换返回true，否则返回false
      */
-    default boolean supports(FileType source, FileType target) {
+    default boolean supports(DocumentFormat source, DocumentFormat target) {
         if (ObjUtil.hasNull(source, target)) {
             return false;
         }

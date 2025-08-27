@@ -1,7 +1,8 @@
 package cc.anqin.doc.test;
 
 import cc.anqin.doc.FT;
-import cc.anqin.doc.convert.FileType;
+import cc.anqin.doc.convert.CF;
+import cc.anqin.doc.convert.DocumentFormat;
 
 import java.io.File;
 import java.util.Arrays;
@@ -45,13 +46,18 @@ public class Test1 {
 
     public static void main(String[] args) throws Exception {
 
-        // 输入和输出文件路径
-        File templateFile = new File("/Users/anqin/Documents/company_project/新疆久领科技/山润社区/政务生成-模板文件/城镇计划生育家庭奖励金申报表.docx");
-
-        RewardReturn source = get();
-
-        File file = FT.of(source, templateFile).convert(FileType.PDF);
-
+//        // 输入和输出文件路径
+//        File templateFile = new File("/Users/anqin/Documents/company_project/新疆久领科技/山润社区/政务生成-模板文件/城镇计划生育家庭奖励金申报表.docx");
+//
+//        RewardReturn source = get();
+//
+//
+//        File file = FT.of(source, templateFile).convert(FileType.PDF);
+//
+//        System.out.println("文档生成成功：" + file.getAbsolutePath());
+//
+        File file = CF.create("D:/1.docx").toFile(DocumentFormat.PDF);
+//
         System.out.println("文档生成成功：" + file.getAbsolutePath());
     }
 }

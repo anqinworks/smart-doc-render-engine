@@ -1,11 +1,16 @@
 package cc.anqin.doc.convert;
 
+import cc.anqin.doc.utils.FileUtils;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.lang.Opt;
+import com.aspose.words.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
+import java.io.OutputStream;
 
 /**
  * 抽象文件转换器
@@ -28,12 +33,12 @@ import java.io.File;
  *     public File convert(File inputFile, int width, int height) {
  *         // 实现DOCX到PDF的转换逻辑
  *     }
- *     
+ *
  *     @Override
  *     public Set&lt;FileType&gt; getSupports() {
  *         return Collections.singleton(FileType.DOCX);
  *     }
- *     
+ *
  *     @Override
  *     public FileType getTargetType() {
  *         return FileType.PDF;
@@ -49,11 +54,19 @@ import java.io.File;
  */
 @Setter
 @Getter
+@Slf4j
 public abstract class AbstractFileConverter implements FileConverter {
 
 
     /** 字体路径 */
     private String fontsPath;
+
+    /** 转换宽度 */
+    private double convertWidth = convertMmToPoints(210);
+
+    /** 转换高度 */
+    private double convertHeight = convertMmToPoints(297);
+
 
     /**
      * 将输入文件转换为目标格式
@@ -63,16 +76,91 @@ public abstract class AbstractFileConverter implements FileConverter {
      * 指定输出文件的宽度和高度参数，通常以毫米为单位。
      * </p>
      *
-     * @param inputFile 需要转换的输入文件
-     * @param width     输出文件的宽度（毫米）
-     * @param height    输出文件的高度（毫米）
      * @return 转换后的文件对象，如果转换失败则返回null
      */
     @Override
-    public File convert(File inputFile, int width, int height) {
-        return null;
+    public File convert(Document doc, DocumentFormat type) {
+        File temporaryFile = FileUtils.getTemporaryFile("." + type.getExtension());
+        return convert(temporaryFile, doc, convertWidth, convertHeight, type);
     }
 
+
+    /**
+     * 转换
+     *
+     * @param outputFile 输出文件
+     * @param doc 医生
+     * @param width 宽度
+     * @param height 高度
+     * @param type 类型
+     * @return {@link File }
+     */
+    @Override
+    public File convert(File outputFile, Document doc, double width, double height, DocumentFormat type) {
+
+        try {
+            doc.save(FileUtil.getOutputStream(outputFile), defaultSetting(doc, type, width, height));
+            return outputFile;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 默认设置
+     *
+     * @param doc 医生
+     */
+    protected SaveOptions defaultSetting(Document doc, DocumentFormat type, double convertWidth, double convertHeight) {
+        SaveOptions options = type.createSaveOptions();
+        if (options == null) {
+            throw new IllegalArgumentException("未知的保存格式");
+        }
+
+        // 设置默认字体
+        FontSettings fontSettings = new FontSettings();
+        String fonts = getFontsPath();
+        fontSettings.setFontsFolders(new String[]{fonts}, true);
+        doc.setFontSettings(fontSettings);
+        // 设置文档中每一节的页面宽高
+        for (Section section : doc.getSections()) {
+            PageSetup pageSetup = section.getPageSetup();
+            pageSetup.setPageWidth(convertWidth);
+            pageSetup.setPageHeight(convertHeight);
+            pageSetup.setLeftMargin(convertMmToPoints(10));  // 10mm 左边距
+            pageSetup.setRightMargin(convertMmToPoints(10)); // 10mm 右边距
+            pageSetup.setTopMargin(convertMmToPoints(10));  // 10mm 上边距
+            pageSetup.setBottomMargin(convertMmToPoints(10)); // 10mm 下边距
+        }
+
+        if (options instanceof PdfSaveOptions){
+            PdfSaveOptions pdfSaveOptions = (PdfSaveOptions) options;
+            pdfSaveOptions.setEmbedFullFonts(true);
+        }
+
+        options.setAllowEmbeddingPostScriptFonts(true);
+        options.setSaveFormat(type.getValue());
+        options.setUseHighQualityRendering(true);
+        options.setPrettyFormat(true);
+        return options;
+    }
+
+
+
+    /**
+     * 保存
+     *
+     * @param doc 医生
+     * @param outputStream 输出流
+     * @param options 选项配置
+     */
+    protected void save(Document doc, OutputStream outputStream, SaveOptions options) {
+        try {
+            doc.save(outputStream, options);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * 获取用于文档转换的字体路径
