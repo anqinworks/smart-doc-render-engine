@@ -13,9 +13,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/io/github/anqinworks/auto-mapping-map/3.6/auto-mapping-map-3.6.jar" />
-          <entry name="$MAVEN_REPOSITORY$/com/squareup/javapoet/1.13.0/javapoet-1.13.0.jar" />
-          <entry name="$MAVEN_REPOSITORY$/cn/hutool/hutool-all/5.8.26/hutool-all-5.8.26.jar" />
+          <entry name="$MAVEN_REPOSITORY$/io/github/anqinworks/auto-mapping-map/3.7/auto-mapping-map-3.7.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="smart-doc-render-engine" />

@@ -31,5 +31,15 @@
       <option name="name" value="main" />
       <option name="url" value="https://jiulingkeji-maven.pkg.coding.net/repository/jl-scp/main/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="groupdocs-artifact-repository" />
+      <option name="name" value="GroupDocs Artifact Repository" />
+      <option name="url" value="https://repository.groupdocs.cloud/repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="repository.groupdocs.com" />
+      <option name="name" value="GroupDocs Repository" />
+      <option name="url" value="https://releases.groupdocs.com/java/repo/" />
+    </remote-repository>
   </component>
 </project>

@@ -1,5 +1,6 @@
 package cc.anqin.doc;
 
+import cc.anqin.doc.convert.AbstractFileConverter;
 import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.FileType;
 import cc.anqin.doc.entity.AsposePlaceholder;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.File;
 
 /**
@@ -115,6 +117,17 @@ public class FT<T extends AsposePlaceholder> {
     /**
      * 将当前文件转换为指定格式
      *
+     * @param converter 转炉
+     * @return 转换后的文件
+     */
+    public <C extends AbstractFileConverter> File convert(C converter) {
+        return CF.create(currentFile).toFile(converter);
+    }
+
+
+    /**
+     * 将当前文件转换为指定格式
+     *
      * @param fileType 目标文件类型
      * @return 转换后的文件
      */
@@ -141,4 +154,5 @@ public class FT<T extends AsposePlaceholder> {
         // 有指定输出路径时使用带输出路径的填充方式
         return PlaceholderFactory.fillTemplate(entity, templateFile, outputFile);
     }
+
 }

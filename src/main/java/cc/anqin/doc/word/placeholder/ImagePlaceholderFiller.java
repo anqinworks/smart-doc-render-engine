@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -62,7 +63,6 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
      */
     @Override
     public void filler() {
-
         DocumentBuilder documentBuilder = Opt.ofTry(() -> new DocumentBuilder(doc))
                 .orElseThrow(() -> new DocumentException("Failed to create DocumentBuilder"));
 
