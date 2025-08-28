@@ -27,18 +27,18 @@ import java.lang.annotation.Target;
  * 使用示例：
  * <pre>
  * // 文本占位符
- * @Placeholder(value = PlaceholderType.TEXT)
+ * &#064;Placeholder(value  = PlaceholderType.TEXT)
  * private String name;
  * 
  * // 图片占位符
- * @Placeholder(
+ * &#064;Placeholder(
  *     value = PlaceholderType.PIC,
  *     pic = @PicWord(width = 100.0, height = 80.0)
  * )
  * private String logoUrl;
  * 
  * // 动态行占位符
- * @Placeholder(value = PlaceholderType.DYNAMIC_ROW)
+ * &#064;Placeholder(value  = PlaceholderType.DYNAMIC_ROW)
  * private List&lt;OrderItem&gt; orderItems;
  * </pre>
  * </p>

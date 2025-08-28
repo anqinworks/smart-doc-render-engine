@@ -46,12 +46,20 @@
 
     <dependencies>
 
+
         <dependency>
             <groupId>cc.anqin</groupId>
             <artifactId>words</artifactId>
             <version>1.0</version>
         </dependency>
 
+        <!-- Maven 依赖 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.tika</groupId>

@@ -5,7 +5,10 @@ import cn.hutool.core.codec.Base64;
 import cn.hutool.core.codec.Base64Decoder;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Opt;
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.URLUtil;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 
@@ -64,6 +67,7 @@ public class FileUtils {
     /**
      * 临时路径
      */
+    @Getter
     public static final String TEMP_PATH = FileUtil.getTmpDir().getAbsolutePath();
 
     /**
@@ -77,7 +81,7 @@ public class FileUtils {
      * @return 创建的临时文件对象
      */
     public static File getTemporaryFile(String suffix) {
-        return new File(TEMP_PATH + File.separator + System.currentTimeMillis() + suffix);
+        return new File(TEMP_PATH + File.separator + UUID.randomUUID().toString(false) + suffix);
     }
 
 
@@ -88,22 +92,30 @@ public class FileUtils {
      * 适用于需要获取远程文件的场景，如下载网络图片、文档等。
      * </p>
      *
-     * @param fileUrl   文件的URL地址，必须是有效的URL格式
+     * @param fileUrl 文件的URL地址，必须是有效的URL格式
+     * @param saveDir 保存目录
      * @return 下载完成的本地文件对象
-     * @throws RuntimeException 如果下载过程中发生错误
+     * @throws IOException ioexception
      */
-    public static File downloadFile(String fileUrl) {
-        try {
-            URL url = new URL(fileUrl);  // 创建 URL 对象
-            InputStream inputStream = url.openStream();
-            Tika tika = new Tika();
-            String detect = tika.detect(inputStream);
-            File temporaryFile = FileUtils.getTemporaryFile("." + FileUtils.parseExtension(detect));
-            Files.copy(inputStream, temporaryFile.toPath());
-            return temporaryFile;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public static File downloadFile(String fileUrl, String saveDir) throws IOException {
+        return downloadFile(fileUrl, saveDir, null);
+    }
+
+    /**
+     * 从 URL 下载文件到指定路径
+     * <p>
+     * 此方法从指定的URL下载文件内容，并保存到本地文件中。
+     * 适用于需要获取远程文件的场景，如下载网络图片、文档等。
+     * </p>
+     *
+     * @param fileUrl 文件的URL地址，必须是有效的URL格式
+     * @param saveDir 保存目录
+     * @param fileName 文件名
+     * @return 下载完成的本地文件对象
+     * @throws IOException ioexception
+     */
+    public static File downloadFile(String fileUrl, String saveDir,String fileName) throws IOException {
+        return FileDownloader.downloadFile(fileUrl, saveDir, fileName);
     }
 
 

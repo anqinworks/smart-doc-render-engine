@@ -3,6 +3,7 @@ package cc.anqin.doc.word.placeholder;
 import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.ex.DocumentException;
+import cc.anqin.doc.utils.FileDownloader;
 import cc.anqin.doc.utils.FileUtils;
 import cc.anqin.doc.utils.VariableUtils;
 import cc.anqin.doc.word.annotation.Placeholder;
@@ -291,7 +292,7 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
     protected static File downloadTemplate(String fileUrl) {
         try {
             log.info("下载文件URL：{}", fileUrl);
-            return FileUtils.downloadFile(fileUrl);
+            return FileUtils.downloadFile(fileUrl, FileUtils.getTEMP_PATH());
         } catch (Exception e) {
             log.error(ExceptionUtil.stacktraceToString(e));
             log.info("下载失败 URL：{} 使用默认图片", fileUrl, e);

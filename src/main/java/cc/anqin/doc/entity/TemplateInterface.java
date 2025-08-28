@@ -20,7 +20,7 @@ package cc.anqin.doc.entity;
  * public class MyTemplate implements TemplateInterface {
  *     private String fileName = "my_template.docx";
  *     
- *     @Override
+ *     &#064;Override
  *     public String getFileName() {
  *         return fileName;
  *     }

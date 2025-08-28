@@ -1,4 +1,4 @@
-package cc.anqin.doc.test;
+package cc.anqin.doc.test.entity;
 
 import cc.anqin.doc.entity.Template;
 import cc.anqin.doc.word.annotation.Placeholder;
@@ -23,7 +23,60 @@ import java.util.List;
 @AutoToMap
 public class RewardReturn extends Template {
 
-    private String personName;
+    /**
+     * 政务国家标准名称
+     */
+    protected String nationalStandardName;
+
+    /**
+     * 提交日期
+     */
+    protected String submissionDate;
+
+    /**
+     * 生日
+     */
+    protected String birthday;
+
+    /**
+     * 当前地址
+     */
+    protected String currentAddress;
+
+    /**
+     * 性别
+     */
+    protected String gender;
+
+    /**
+     * 户籍地址
+     */
+    protected String householdAddress;
+
+    /**
+     * 电话
+     */
+    protected String phone;
+
+    /**
+     * 身份证
+     */
+    protected String idCard;
+
+    /**
+     * 民族
+     */
+    protected String nation;
+
+    /**
+     * 姓名
+     */
+    protected String personName;
+
+    /**
+     * 籍贯
+     */
+    protected String domicile;
 
     /**
      * 区
@@ -58,7 +111,7 @@ public class RewardReturn extends Template {
     /**
      * 头像
      */
-    @Placeholder(value = PlaceholderType.PIC, pic = @Placeholder.PicWord(width = 110, height = 120))
+    @Placeholder(value = PlaceholderType.PIC, pic = @Placeholder.PicWord(width = 90, height = 120))
     private String avatar;
 
     /**

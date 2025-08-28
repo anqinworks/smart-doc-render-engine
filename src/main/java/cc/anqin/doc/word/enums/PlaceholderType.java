@@ -21,13 +21,13 @@ import lombok.Getter;
  * <p>
  * 使用示例：
  * <pre>
- * @Placeholder(type = PlaceholderType.TEXT)
+ * &#064;Placeholder(type  = PlaceholderType.TEXT)
  * private String textField;
  * 
- * @Placeholder(type = PlaceholderType.PIC)
+ * &#064;Placeholder(type  = PlaceholderType.PIC)
  * private String imageUrl;
  * 
- * @Placeholder(type = PlaceholderType.DYNAMIC_ROW)
+ * &#064;Placeholder(type  = PlaceholderType.DYNAMIC_ROW)
  * private List&lt;DataItem&gt; dataList;
  * </pre>
  * </p>

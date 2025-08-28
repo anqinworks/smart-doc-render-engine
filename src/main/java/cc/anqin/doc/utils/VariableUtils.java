@@ -23,15 +23,6 @@ import java.util.stream.Collectors;
  *   <li>空值处理 - 对空值和空白字符进行适当处理</li>
  * </ul>
  * </p>
- * <p>
- * 使用示例：
- * <pre>
- * // 查找匹配的索引
- * List&lt;String&gt; parts = Arrays.asList("$", "{", "name", "}");
- * List&lt;Integer&gt; indexes = VariableUtils.findMatchingIndex(parts, "${name}");
- * // 结果: [0, 1, 2, 3]
- * </pre>
- * </p>
  *
  * @author Mr.An
  * @date 2024/12/20
