@@ -2,6 +2,7 @@ package cc.anqin.doc.convert;
 
 import cc.anqin.doc.convert.strategy.DefaultFileConvert;
 import cc.anqin.doc.ex.DocumentException;
+import cc.anqin.doc.utils.FileUtils;
 import cn.hutool.core.io.FileUtil;
 import com.aspose.words.Document;
 import com.aspose.words.SaveFormat;
@@ -151,6 +152,9 @@ public class CF {
      */
     private File execute() {
         try {
+            if (this.outputFile == null) {
+                this.outputFile = FileUtils.getTemporaryFile(format.getExtensionWithDot());
+            }
             return new DefaultFileConvert()
                     .convert(this.outputFile, document, this.width, this.height, format);
         } catch (Exception e) {

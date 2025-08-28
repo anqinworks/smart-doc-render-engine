@@ -12,6 +12,7 @@ import com.aspose.words.FindReplaceOptions;
 import com.aspose.words.Range;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -40,7 +41,7 @@ import java.util.Set;
  *     public void filler() {
  *         // 实现特定类型占位符的填充逻辑
  *     }
- *     
+ *
  *     @Override
  *     public Field[] supports(Field[] fields) {
  *         // 实现对特定字段类型的支持判断
@@ -56,6 +57,7 @@ import java.util.Set;
  * @see ImagePlaceholderFiller 图片占位符填充器
  * @see DynamicRowPlaceholderFiller 动态行占位符填充器
  */
+@Slf4j
 @Getter
 @Setter
 public abstract class AbstractPlaceholderFillerService implements PlaceholderFillerService {
@@ -94,11 +96,17 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      */
     @Override
     public <T extends AsposePlaceholder>
-    PlaceholderFillerService create(Document doc, T entity) {
+    PlaceholderFillerService create(Field[] fields, Document doc, T entity) {
         this.doc = Assert.notNull(doc, () -> new DocumentException("Document cannot be null"));
-        this.entity = Assert.notNull(entity, () -> new DocumentException("Entity cannot be null"));
-        this.fields = CollUtil.newHashSet(ReflectUtil.getFields(entity.getClass()));
+        this.fields = CollUtil.newHashSet(fields);
         this.dataMap = ConvertMap.toMap(entity, entity.getClass());
+        setEntity(entity);
+        return this;
+    }
+
+
+    public PlaceholderFillerService setEntity(AsposePlaceholder entity) {
+        this.entity = Assert.notNull(entity, () -> new DocumentException("Entity cannot be null"));
         return this;
     }
 
@@ -134,7 +142,7 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      * 此抽象方法定义了占位符填充的核心逻辑，必须由具体的子类实现。
      * 不同类型的占位符填充器会有不同的填充逻辑，例如文本替换、图片插入、表格生成等。
      * </p>
-     * 
+     *
      * @throws DocumentException 如果在填充过程中发生错误
      */
     @Override
@@ -152,6 +160,16 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      * @return 完整格式的占位符文本字符串
      */
     protected String placeholderText(String text) {
+        Assert.notNull(entity, () -> new DocumentException("Entity cannot be null"));
         return String.format("%s%s%s", entity.getPrefix(), text, entity.getSuffix());
+    }
+
+
+    protected boolean fieldsEmpty() {
+        if (CollUtil.isEmpty(fields)) {
+            log.info("模板在 {} 中,字段为空", this.getClass().getName());
+            return true;
+        }
+        return false;
     }
 }

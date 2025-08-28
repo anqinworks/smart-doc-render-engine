@@ -1,6 +1,7 @@
 package cc.anqin.doc.word.placeholder;
 
 import cc.anqin.doc.entity.AsposePlaceholder;
+import cn.hutool.core.util.ReflectUtil;
 import com.aspose.words.Document;
 import lombok.SneakyThrows;
 
@@ -26,7 +27,7 @@ import java.lang.reflect.Field;
  * // 创建文本占位符填充器
  * PlaceholderFillerService filler = new TextPlaceholderFiller()
  *     .create(document, templateData);
- * 
+ *
  * // 执行填充
  * filler.filler();
  * </pre>
@@ -42,6 +43,9 @@ import java.lang.reflect.Field;
 public interface PlaceholderFillerService {
 
 
+    <T extends AsposePlaceholder> PlaceholderFillerService setEntity(T entity);
+
+
     /**
      * 创建占位符填充服务实例
      * <p>
@@ -54,7 +58,7 @@ public interface PlaceholderFillerService {
      * @param <T>    实现AsposePlaceholder接口的泛型类型
      * @return 当前占位符填充服务实例，用于链式调用
      */
-    <T extends AsposePlaceholder> PlaceholderFillerService create(Document doc, T entity);
+    <T extends AsposePlaceholder> PlaceholderFillerService create(Field[] fields, Document doc, T entity);
 
 
     /**
@@ -63,23 +67,16 @@ public interface PlaceholderFillerService {
      * 此方法是占位符填充的核心逻辑，负责将数据实体中的值填充到文档中的对应占位符位置。
      * 不同类型的占位符填充器会有不同的填充逻辑，例如文本替换、图片插入、表格生成等。
      * </p>
-     * 
+     *
      * @throws RuntimeException 如果在填充过程中发生错误
      */
     void filler();
 
 
-    /**
-     * 筛选支持的字段
-     * <p>
-     * 此方法用于判断填充器是否支持特定字段类型的占位符。
-     * 实现类需要根据自身支持的占位符类型，从提供的字段数组中筛选出可以处理的字段。
-     * 例如，文本填充器只处理文本类型的字段，图片填充器只处理图片类型的字段。
-     * </p>
-     *
-     * @param fields 要筛选的字段数组
-     * @return 支持的字段数组，只包含当前填充器可以处理的字段
-     */
+    default Field[] supports(Class<?> clazz) {
+        return supports(ReflectUtil.getFields(clazz));
+    }
+
     Field[] supports(Field[] fields);
 
 
@@ -92,7 +89,6 @@ public interface PlaceholderFillerService {
      *
      * @param doc    要处理的Word文档对象
      * @param fields 需要清空占位符的字段数组
-     * @throws Exception 如果在替换过程中发生错误
      */
     @SneakyThrows
     void empty(Document doc, Field... fields);

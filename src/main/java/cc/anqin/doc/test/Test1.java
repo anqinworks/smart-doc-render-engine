@@ -1,7 +1,6 @@
 package cc.anqin.doc.test;
 
 import cc.anqin.doc.FT;
-import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.DocumentFormat;
 
 import java.io.File;
@@ -19,6 +18,7 @@ public class Test1 {
         RewardReturn defaultData = new RewardReturn();
 
         // 设置默认值
+
         defaultData.setDistrict("test区");
         defaultData.setStreet("test号");
         defaultData.setCommunity("test社区");
@@ -44,20 +44,19 @@ public class Test1 {
         return defaultData;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-//        // 输入和输出文件路径
-//        File templateFile = new File("/Users/anqin/Documents/company_project/新疆久领科技/山润社区/政务生成-模板文件/城镇计划生育家庭奖励金申报表.docx");
+        // 输入和输出文件路径
+        File templateFile = new File("D:/城镇计划生育家庭奖励金申报表.docx");
+
+        RewardReturn source = get();
+
+        FT<RewardReturn> ft = FT.of(source, templateFile);
+        File recordFile = ft.getRecordFile();
+        File file = ft.getCurrentFile();
+
+        File convert = ft.convert(DocumentFormat.PDF);
 //
-//        RewardReturn source = get();
-//
-//
-//        File file = FT.of(source, templateFile).convert(FileType.PDF);
-//
-//        System.out.println("文档生成成功：" + file.getAbsolutePath());
-//
-        File file = CF.create("D:/1.docx").toFile(DocumentFormat.PDF);
-//
-        System.out.println("文档生成成功：" + file.getAbsolutePath());
+        System.out.println("文档生成成功：" + convert.getAbsolutePath());
     }
 }

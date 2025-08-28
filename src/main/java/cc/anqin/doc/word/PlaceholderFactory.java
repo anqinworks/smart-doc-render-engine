@@ -1,6 +1,7 @@
 package cc.anqin.doc.word;
 
 import cc.anqin.doc.entity.AsposePlaceholder;
+import cc.anqin.doc.entity.Template;
 import cc.anqin.doc.ex.DocumentException;
 import cc.anqin.doc.utils.FileUtils;
 import cc.anqin.doc.word.placeholder.DynamicRowPlaceholderFiller;
@@ -18,6 +19,7 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
@@ -126,7 +128,7 @@ public class PlaceholderFactory {
             // 清除变量
             Document docClearVariable = doc(templateRecord);
 
-            executeClearVariable(fields, docClearVariable);
+            executeClearVariable(fields, docClearVariable, source);
 
             docClearVariable.save(Files.newOutputStream(clearVariable.toPath()), SaveFormat.DOCX);
 
@@ -168,21 +170,17 @@ public class PlaceholderFactory {
      */
     private <T extends AsposePlaceholder> void
     parallelExecuteStrategy(Document doc, T entity) {
-        getStrategy().parallelStream().forEach(filler -> filler.create(doc, entity).filler());
+        getStrategy().parallelStream().forEach(f -> f.create(f.supports(entity.getClass()), doc, entity).filler());
     }
 
-    /**
-     * 并行执行清除未替换变量操作
-     * <p>
-     * 该方法用于清除文档中未被替换的占位符变量，确保最终文档中不会出现原始占位符。
-     * 它使用并行流同时执行多种占位符填充器的清除操作，每个填充器只处理其支持的字段类型。
-     * </p>
-     *
-     * @param fields 实体类的字段数组
-     * @param doc Aspose文档对象
-     */
+
     private void executeClearVariable(Field[] fields, Document doc) {
-        getStrategy().parallelStream().forEach(r -> r.empty(doc, r.supports(fields)));
+        executeClearVariable(fields, doc, Template.defaultTemplate());
+    }
+
+
+    private void executeClearVariable(Field[] fields, Document doc, AsposePlaceholder placeholder) {
+        getStrategy().parallelStream().forEach(r -> r.setEntity(placeholder).empty(doc, r.supports(fields)));
     }
 
     /**

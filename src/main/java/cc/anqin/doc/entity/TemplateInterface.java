@@ -62,9 +62,7 @@ public interface TemplateInterface extends AsposePlaceholder {
      * @return {@link String }
      */
     @Override
-    default String getPrefix() {
-        return "${";
-    }
+    String getPrefix();
 
     /**
      * 获取后缀
@@ -72,7 +70,5 @@ public interface TemplateInterface extends AsposePlaceholder {
      * @return {@link String }
      */
     @Override
-    default String getSuffix() {
-        return "}";
-    }
+    String getSuffix();
 }

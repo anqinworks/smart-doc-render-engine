@@ -1,5 +1,7 @@
 package cc.anqin.doc.word.placeholder;
 
+import cc.anqin.doc.convert.CF;
+import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.ex.DocumentException;
 import cc.anqin.doc.utils.FileUtils;
 import cc.anqin.doc.utils.VariableUtils;
@@ -7,16 +9,19 @@ import cc.anqin.doc.word.annotation.Placeholder;
 import cc.anqin.doc.word.enums.PlaceholderType;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.lang.Opt;
+import cn.hutool.core.util.URLUtil;
 import com.aspose.words.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.Tika;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -42,7 +47,7 @@ import java.util.stream.Collectors;
  * // 创建图像占位符填充器并绑定数据
  * PlaceholderFillerService filler = new ImagePlaceholderFiller()
  *     .create(document, templateData);
- * 
+ *
  * // 执行图像占位符填充
  * filler.filler();
  * </pre>
@@ -63,6 +68,11 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
      */
     @Override
     public void filler() {
+
+        if (fieldsEmpty()) {
+            return;
+        }
+
         DocumentBuilder documentBuilder = Opt.ofTry(() -> new DocumentBuilder(doc))
                 .orElseThrow(() -> new DocumentException("Failed to create DocumentBuilder"));
 
@@ -76,12 +86,16 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
             assert placeholder != null;
             Placeholder.PicWord pic = placeholder.pic();
 
-            File image = (File) dataMap.get(field.getName()); // 获取图片File
-            // 如果图片URL，则按文本覆盖掉变量
-            if (image == null) {
-                continue;
+            Object o = dataMap.get(field.getName());
 
+            if (o == null) {
+                log.warn("Field '{}' is null, skipping...", fieldName);
+                continue;
             }
+
+            // 文件对象
+            File image = parse(o);
+
             try {
                 HashSet<String> filled = new HashSet<>();
                 // 遍历段落，查找并替换占位符
@@ -148,7 +162,6 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
         // 校验文件
         validateImageFile(image);
 
-        toPNG(image);
 
         // 遍历每个 Run，检查是否包含占位符
         StringBuilder currentText = new StringBuilder();  // 用来拼接当前遍历的 Run 文本
@@ -208,9 +221,86 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
                         );
                         throw new DocumentException(e);
                     } finally {
-                        CompletableFuture.runAsync(() -> FileUtil.del(image));
+                        File finalImage = image;
+                        CompletableFuture.runAsync(() -> FileUtil.del(finalImage));
                     }
                 }
+            }
+        }
+    }
+
+
+    private static File parse(Object o) {
+
+        try {
+            File image = null;
+            // 文件对象
+            if (o instanceof File) {
+                image = (File) o;
+            }
+            // 文件URL
+            if (o instanceof String) {
+                image = downloadTemplate((String) o);
+            }
+
+            if (o instanceof byte[]) {
+                byte[] bytes = (byte[]) o;
+                String extension = FileUtils.parseExtension(new Tika().detect(bytes));
+                File temporaryFile = FileUtils.getTemporaryFile("." + extension);
+                Files.write(temporaryFile.toPath(), bytes);
+                image = temporaryFile;
+            }
+
+            if (o instanceof InputStream) {
+                InputStream inputStream = (InputStream) o;
+                String extension = FileUtils.parseExtension(new Tika().detect(inputStream));
+                File temporaryFile = FileUtils.getTemporaryFile("." + extension);
+                Files.copy(inputStream, temporaryFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                image = temporaryFile;
+            }
+
+            if (o instanceof Path) {
+                Path path = (Path) o;
+                image = path.toFile();
+            }
+            if (!isValidFile(image)) {
+                log.info("无效文件，使用默认图片");
+                ClassPathResource resource = new ClassPathResource("img/default.png");
+                image = resource.getFile();
+            }
+            return image;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 验证文件有效性
+     */
+    private static boolean isValidFile(File file) {
+        return file != null && file.exists() && file.isFile() && file.length() > 0;
+    }
+
+
+    /**
+     * 下载文件
+     *
+     * @param fileUrl 文件 URL
+     * @return {@link File }
+     */
+    protected static File downloadTemplate(String fileUrl) {
+        try {
+            log.info("下载文件URL：{}", fileUrl);
+            return FileUtils.downloadFile(fileUrl);
+        } catch (Exception e) {
+            log.error(ExceptionUtil.stacktraceToString(e));
+            log.info("下载失败 URL：{} 使用默认图片", fileUrl, e);
+            ClassPathResource resource = new ClassPathResource("img/default.png");
+            try {
+                return resource.getFile();
+            } catch (Exception ex) {
+                log.error("无法获取 img/default.png 文件，可能是由于 JAR 包内访问资源！{}", ExceptionUtil.stacktraceToString(ex));
+                return null;
             }
         }
     }
@@ -241,9 +331,7 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
      * @param file 文件
      * @throws Exception 例外
      */
-    public static void toPNG(File file) throws Exception {
-        File temporaryFile = FileUtils.getTemporaryFile(".png");
-        FileUtils.convertToPNG(file, temporaryFile);
-        FileUtil.copy(temporaryFile, file, true);
+    public static File toPNG(File file) throws Exception {
+        return CF.create(file).toFile(DocumentFormat.PNG);
     }
 }

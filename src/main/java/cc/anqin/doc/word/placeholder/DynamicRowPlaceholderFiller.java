@@ -126,6 +126,10 @@ public class DynamicRowPlaceholderFiller extends AbstractPlaceholderFillerServic
     @Override
     public void filler() {
 
+        if (fieldsEmpty()) {
+            return;
+        }
+
         // 处理每个字段
         for (Field field : fields) {
 

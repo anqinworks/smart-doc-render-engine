@@ -50,7 +50,6 @@ import java.io.OutputStream;
  * @author Mr.An
  * @date 2025/08/18
  * @see FileConverter 文件转换器接口
- * @see ConverterFileFactory 转换器工厂类
  */
 @Setter
 @Getter
@@ -62,10 +61,10 @@ public abstract class AbstractFileConverter implements FileConverter {
     private String fontsPath;
 
     /** 转换宽度 */
-    private double convertWidth = convertMmToPoints(210);
+    private double convertWidth = 210;
 
     /** 转换高度 */
-    private double convertHeight = convertMmToPoints(297);
+    private double convertHeight = 297;
 
 
     /**
@@ -125,12 +124,8 @@ public abstract class AbstractFileConverter implements FileConverter {
         // 设置文档中每一节的页面宽高
         for (Section section : doc.getSections()) {
             PageSetup pageSetup = section.getPageSetup();
-            pageSetup.setPageWidth(convertWidth);
-            pageSetup.setPageHeight(convertHeight);
-            pageSetup.setLeftMargin(convertMmToPoints(10));  // 10mm 左边距
-            pageSetup.setRightMargin(convertMmToPoints(10)); // 10mm 右边距
-            pageSetup.setTopMargin(convertMmToPoints(10));  // 10mm 上边距
-            pageSetup.setBottomMargin(convertMmToPoints(10)); // 10mm 下边距
+            pageSetup.setPageWidth(convertMmToPoints(convertWidth));
+            pageSetup.setPageHeight(convertMmToPoints(convertHeight));
         }
 
         if (options instanceof PdfSaveOptions){

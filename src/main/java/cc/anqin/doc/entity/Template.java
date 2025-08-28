@@ -26,7 +26,7 @@ import java.io.Serializable;
  * <pre>
  * public class MyTemplate extends Template {
  *     private String name;
- *     
+ *
  *     @Override
  *     public String getFileName() {
  *         return "自定义模板";
@@ -53,10 +53,10 @@ public abstract class Template implements TemplateInterface, Serializable {
     private int convertHeight;
 
     /** 变量前缀 */
-    private String prefix;
+    private String prefix = "${";
 
     /** 变量后缀 */
-    private String suffix;
+    private String suffix = "}";
 
 
     /**

@@ -8,6 +8,7 @@ import cn.hutool.core.lang.Opt;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -38,13 +39,13 @@ import java.nio.file.Files;
  * <pre>
  * // 创建临时文件
  * File tempFile = FileUtils.getTemporaryFile(".docx");
- * 
+ *
  * // 从URL下载文件
  * File downloadedFile = FileUtils.downloadFile("https://example.com/sample.docx", tempFile);
- * 
+ *
  * // 检测文件类型
  * String mimeType = FileUtils.getMimeType(downloadedFile);
- * 
+ *
  * // Base64转文件
  * File imageFile = FileUtils.base64ToFile(base64String);
  * </pre>
@@ -88,16 +89,18 @@ public class FileUtils {
      * </p>
      *
      * @param fileUrl   文件的URL地址，必须是有效的URL格式
-     * @param localFile 要保存到的本地文件对象
      * @return 下载完成的本地文件对象
      * @throws RuntimeException 如果下载过程中发生错误
      */
-    public static File downloadFile(String fileUrl, File localFile) {
+    public static File downloadFile(String fileUrl) {
         try {
             URL url = new URL(fileUrl);  // 创建 URL 对象
             InputStream inputStream = url.openStream();
-            Files.copy(inputStream, localFile.toPath());
-            return localFile;
+            Tika tika = new Tika();
+            String detect = tika.detect(inputStream);
+            File temporaryFile = FileUtils.getTemporaryFile("." + FileUtils.parseExtension(detect));
+            Files.copy(inputStream, temporaryFile.toPath());
+            return temporaryFile;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -230,15 +233,26 @@ public class FileUtils {
         // 内容检测（需要引入tika-core依赖）
         Tika tika = new Tika();
         try {
-            return Opt.ofBlankAble(tika.detect((new ByteArrayInputStream(decoded))))
-                    .map(r -> {
-                        String[] f = r.split("/");
-                        if (f.length > 1) return f[1];
-                        return null;
-                    })
-                    .orElse(null);
+            return parseExtension(tika.detect((new ByteArrayInputStream(decoded))));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    /**
+     * parse 扩展
+     *
+     * @param mimeType MIME 类型
+     * @return {@link String }
+     */
+    public static String parseExtension(String mimeType) {
+        return Opt.ofBlankAble(mimeType)
+                .map(r -> {
+                    String[] f = r.split("/");
+                    if (f.length > 1) return f[1];
+                    return null;
+                })
+                .orElse(null);
     }
 }

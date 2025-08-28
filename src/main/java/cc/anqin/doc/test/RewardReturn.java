@@ -23,6 +23,8 @@ import java.util.List;
 @AutoToMap
 public class RewardReturn extends Template {
 
+    private String personName;
+
     /**
      * 区
      */

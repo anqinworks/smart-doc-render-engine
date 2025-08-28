@@ -65,6 +65,10 @@ public class TextPlaceholderFiller extends AbstractPlaceholderFillerService {
     @SuppressWarnings("unchecked")
     public void filler() {
 
+        if (fieldsEmpty()) {
+            return;
+        }
+
         for (Field field : fields) {
             String fieldName = field.getName();
             String placeholderText = placeholderText(fieldName);

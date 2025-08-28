@@ -5,18 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="修改部分功能">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DefaultFileConvert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/default.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DocConverter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/HtmlConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/DynamicRowPlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/DynamicRowPlaceholderFiller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,10 +60,10 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/TextPlaceholderFiller.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MavenImportPreferences">
@@ -91,7 +95,7 @@
     "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/workspace/smart-doc-render-engine",
+    "last_opened_file_path": "C:/workspace/smart-doc-render-engine/src/lib",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,7 +104,7 @@
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.3",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true",
     "应用程序.DocConverter.executor": "Run",
     "应用程序.DocxToPdfConverter.executor": "Run",
@@ -112,9 +116,14 @@
       <recent name="cc.anqin.doc.convert.strategy" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\workspace\smart-doc-render-engine" />
+      <recent name="C:\workspace\smart-doc-render-engine\src\lib" />
+      <recent name="C:\workspace\smart-doc-render-engine\src\main\resources\img" />
       <recent name="C:\workspace\smart-doc-render-engine\src\main\resources" />
+      <recent name="C:\workspace\smart-doc-render-engine" />
       <recent name="C:\workspace\smart-doc-render-engine\src\main\java\cc\anqin\doc" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\workspace\smart-doc-render-engine" />
     </key>
   </component>
   <component name="RunManager" selected="应用程序.Test1">
@@ -184,7 +193,7 @@
       <workItem from="1755505997954" duration="10044000" />
       <workItem from="1755569059331" duration="19503000" />
       <workItem from="1755655716300" duration="2032000" />
-      <workItem from="1756281175820" duration="12244000" />
+      <workItem from="1756281175820" duration="23984000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -234,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756288160342</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1756296296015</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1756296296015</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,9 +281,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java</url>
+          <line>150</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
