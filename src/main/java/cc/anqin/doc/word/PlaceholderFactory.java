@@ -4,6 +4,7 @@ import cc.anqin.doc.entity.Template;
 import cc.anqin.doc.entity.TemplateInterface;
 import cc.anqin.doc.ex.DocumentException;
 import cc.anqin.doc.utils.FileUtils;
+import cc.anqin.doc.utils.Pair;
 import cc.anqin.doc.word.annotation.Placeholder;
 import cc.anqin.doc.word.placeholder.DynamicRowPlaceholderFiller;
 import cc.anqin.doc.word.placeholder.ImagePlaceholderFiller;
@@ -18,13 +19,13 @@ import com.aspose.words.Document;
 import com.aspose.words.SaveFormat;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
+
 
 /**
  * 文档模板占位符填充工厂
@@ -50,7 +51,7 @@ import java.util.List;
  * // 基础模板填充
  * MyTemplate template = new MyTemplate().setName("示例文档");
  * Pair&lt;File, File&gt; result = PlaceholderFactory.fillTemplate(template, templateFile);
- * 
+ *
  * // 指定输出文件的模板填充
  * Pair&lt;File, File&gt; result = PlaceholderFactory.fillTemplate(template, templateFile, outputFile);
  * </pre>
@@ -68,6 +69,7 @@ import java.util.List;
 @Slf4j
 @UtilityClass
 public class PlaceholderFactory {
+
 
     /**
      * 填充模板并输出到指定文件
@@ -145,6 +147,7 @@ public class PlaceholderFactory {
             parallelExecuteStrategy(doc, source);
 
             doc.save(Files.newOutputStream(templateRecord.toPath()), SaveFormat.DOCX);
+
             log.info("模板:{} 文档记录生成成功：{}", templateFile.getName(), templateRecord.getAbsolutePath());
 
             // 清除变量
@@ -157,7 +160,7 @@ public class PlaceholderFactory {
             log.info("模板:{} 文档生成成功：{}", templateFile.getName(), clearVariable.getAbsolutePath());
 
             // key 作为 docx 模板记录，value 作为 要转换的 PDF 文件
-            return MutablePair.of(templateRecord, clearVariable);
+            return Pair.of(templateRecord, clearVariable);
         } catch (Exception e) {
             log.error("模板:{} 文档生成失败，error：{}", templateFile.getName(), ExceptionUtil.stacktraceToString(e));
             throw new DocumentException(e);

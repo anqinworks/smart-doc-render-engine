@@ -40,25 +40,16 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <lombok.version>1.18.30</lombok.version>
-        <auto-mapping-map.version>3.7</auto-mapping-map.version>
+        <auto-mapping-map.version>3.8</auto-mapping-map.version>
     </properties>
 
 
     <dependencies>
 
-
         <dependency>
             <groupId>cc.anqin</groupId>
             <artifactId>words</artifactId>
             <version>1.0</version>
-        </dependency>
-
-        <!-- Maven 依赖 -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.9.3</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -68,32 +59,18 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.jtidy</groupId>
-            <artifactId>jtidy</artifactId>
-            <version>1.0.2</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.8.26</version>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.17.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>26.0.2</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <groupId>io.github.anqinworks</groupId>
             <artifactId>auto-mapping-map</artifactId>

@@ -28,7 +28,6 @@ public class FileDownloader {
     public static File downloadFile(String fileUrl, String saveDir, String fileName) throws IOException {
         InputStream in = null;
         FileOutputStream out = null;
-
         try {
             // 创建URL对象
             URL url = new URL(fileUrl);

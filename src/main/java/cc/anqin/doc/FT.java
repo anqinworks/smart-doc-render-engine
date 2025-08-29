@@ -4,6 +4,7 @@ import cc.anqin.doc.convert.AbstractFileConverter;
 import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.entity.TemplateInterface;
+import cc.anqin.doc.utils.Pair;
 import cc.anqin.doc.word.PlaceholderFactory;
 import cc.anqin.doc.word.annotation.Placeholder;
 import cn.hutool.core.io.FileUtil;
@@ -11,7 +12,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.tuple.Pair;
 import java.io.File;
 
 /**
