@@ -32,9 +32,16 @@ import java.util.stream.Collectors;
 public class VariableUtils {
 
 
+
     /**
      * 提取所有字符索引
-     * 对于输入 "$", "{", "name", "}"，输出将是： Indexes: [0, 1, 2, 3]
+     * <pre>
+     * findMatchingIndex(ListUtil.toList("区（县）卫", "健", "委主任签名：", "${districtSignature}"), "${districtSignature}")
+     * 结果： [3]
+     * findMatchingIndex(ListUtil.toList("区（县）卫", "${", "districtSignature", "}"), "${districtSignature}")
+     * 结果：[1, 2, 3]
+     * </pre>
+     *
      *
      * @param dataTarget 列表
      * @return {@link Set }<{@link Integer }>

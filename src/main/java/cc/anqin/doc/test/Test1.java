@@ -73,6 +73,5 @@ public class Test1 {
         File pdf = ft.convert(DocumentFormat.PDF);
 
         System.out.println("转换文档生成成功：" + pdf.getAbsolutePath());
-
     }
 }

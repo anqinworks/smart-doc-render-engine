@@ -30,7 +30,7 @@ import java.io.Serializable;
  *     private String name;
  *     private String address;
  *     
- *     @Override
+ *     &#064;Override
  *     public String getFileName() {
  *         return "自定义模板";
  *     }
