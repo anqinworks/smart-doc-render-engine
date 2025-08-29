@@ -3,15 +3,15 @@ package cc.anqin.doc;
 import cc.anqin.doc.convert.AbstractFileConverter;
 import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.DocumentFormat;
-import cc.anqin.doc.entity.AsposePlaceholder;
+import cc.anqin.doc.entity.TemplateInterface;
 import cc.anqin.doc.word.PlaceholderFactory;
+import cc.anqin.doc.word.annotation.Placeholder;
 import cn.hutool.core.io.FileUtil;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.File;
 
 /**
@@ -42,7 +42,7 @@ import java.io.File;
  * @param <T> 模板占位符实体类型，必须继承自AsposePlaceholder
  * @author Mr.An
  * @date 2025/08/19
- * @see AsposePlaceholder 模板占位符接口
+ * @see Placeholder 模板占位符接口
  * @see PlaceholderFactory 占位符处理工厂
  * @see CF 文件转换工厂
  * @see DocumentFormat 文档格式枚举
@@ -50,7 +50,7 @@ import java.io.File;
 @Data
 @Accessors(chain = true)
 @Setter(AccessLevel.PRIVATE)
-public class FT<T extends AsposePlaceholder> {
+public class FT<T extends TemplateInterface> {
 
     /**
      * 模板数据实体 - 包含需要填充到模板中的数据
@@ -111,7 +111,7 @@ public class FT<T extends AsposePlaceholder> {
      * @throws IllegalArgumentException 如果entity或templateFile为null
      * @throws RuntimeException 如果模板填充过程中发生错误
      */
-    public static <T extends AsposePlaceholder> FT<T> of(T entity, File templateFile) {
+    public static <T extends TemplateInterface> FT<T> of(T entity, File templateFile) {
         return new FT<T>()
                 .setEntity(entity)
                 .setTemplateFile(templateFile).fill();
@@ -132,7 +132,7 @@ public class FT<T extends AsposePlaceholder> {
      * @throws IllegalArgumentException 如果任何参数为null
      * @throws RuntimeException 如果模板填充过程中发生错误
      */
-    public static <T extends AsposePlaceholder> FT<T> of(T entity, File templateFile, File outputFile) {
+    public static <T extends TemplateInterface> FT<T> of(T entity, File templateFile, File outputFile) {
         return of(entity, templateFile)
                 .setOutputFile(outputFile).fill();
     }

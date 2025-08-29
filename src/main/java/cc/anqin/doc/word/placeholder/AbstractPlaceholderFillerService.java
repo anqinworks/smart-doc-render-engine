@@ -1,11 +1,11 @@
 package cc.anqin.doc.word.placeholder;
 
-import cc.anqin.doc.entity.AsposePlaceholder;
+import cc.anqin.doc.entity.TemplateInterface;
 import cc.anqin.doc.ex.DocumentException;
+import cc.anqin.doc.word.annotation.Placeholder;
 import cc.anqin.processor.base.ConvertMap;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.aspose.words.Document;
 import com.aspose.words.FindReplaceOptions;
@@ -40,7 +40,7 @@ import java.util.Set;
  * 扩展示例：
  * <pre>
  * public class CustomPlaceholderFiller extends AbstractPlaceholderFillerService {
- *     @Override
+ *     &#064;Override
  *     public void filler() {
  *         // 实现特定类型占位符的填充逻辑
  *         if (fieldsEmpty()) return;
@@ -52,7 +52,7 @@ import java.util.Set;
  *         }
  *     }
  *
- *     @Override
+ *     &#064;Override
  *     public Field[] supports(Field[] fields) {
  *         // 实现对特定字段类型的支持判断
  *         return Arrays.stream(fields)
@@ -77,7 +77,7 @@ import java.util.Set;
  * @see TextPlaceholderFiller 文本占位符填充器
  * @see ImagePlaceholderFiller 图片占位符填充器
  * @see DynamicRowPlaceholderFiller 动态行占位符填充器
- * @see AsposePlaceholder 模板占位符接口
+ * @see Placeholder 模板占位符接口
  */
 @Slf4j
 @Getter
@@ -116,7 +116,7 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      * </ul>
      * </p>
      */
-    protected AsposePlaceholder entity;
+    protected TemplateInterface entity;
 
     /**
      * 数据映射 - 存储占位符名称与实际数据的映射关系
@@ -204,7 +204,7 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      * @throws DocumentException 如果文档对象或实体对象为null
      */
     @Override
-    public <T extends AsposePlaceholder>
+    public <T extends TemplateInterface>
     PlaceholderFillerService create(Field[] fields, Document doc, T entity) {
         this.doc = Assert.notNull(doc, () -> new DocumentException("Document cannot be null"));
         this.fields = CollUtil.newHashSet(fields);
@@ -233,7 +233,7 @@ public abstract class AbstractPlaceholderFillerService implements PlaceholderFil
      * @return 当前占位符填充服务实例，用于链式调用
      * @throws IllegalArgumentException 如果entity为null
      */
-    public PlaceholderFillerService setEntity(AsposePlaceholder entity) {
+    public PlaceholderFillerService setEntity(TemplateInterface entity) {
         this.entity = Assert.notNull(entity, () -> new DocumentException("Entity cannot be null"));
         return this;
     }

@@ -1,6 +1,7 @@
 package cc.anqin.doc.word.placeholder;
 
-import cc.anqin.doc.entity.AsposePlaceholder;
+import cc.anqin.doc.entity.TemplateInterface;
+import cc.anqin.doc.word.annotation.Placeholder;
 import cn.hutool.core.util.ReflectUtil;
 import com.aspose.words.Document;
 import lombok.SneakyThrows;
@@ -43,7 +44,13 @@ import java.lang.reflect.Field;
 public interface PlaceholderFillerService {
 
 
-    <T extends AsposePlaceholder> PlaceholderFillerService setEntity(T entity);
+    /**
+     * 设置实体
+     *
+     * @param entity 实体
+     * @return {@link PlaceholderFillerService }
+     */
+    <T extends TemplateInterface> PlaceholderFillerService setEntity(T entity);
 
 
     /**
@@ -58,7 +65,7 @@ public interface PlaceholderFillerService {
      * @param <T>    实现AsposePlaceholder接口的泛型类型
      * @return 当前占位符填充服务实例，用于链式调用
      */
-    <T extends AsposePlaceholder> PlaceholderFillerService create(Field[] fields, Document doc, T entity);
+    <T extends TemplateInterface> PlaceholderFillerService create(Field[] fields, Document doc, T entity);
 
 
     /**

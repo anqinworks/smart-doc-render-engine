@@ -68,7 +68,7 @@ import java.io.OutputStream;
  * converter.setConvertWidth(297);  // A4宽度
  * converter.setConvertHeight(420); // A4高度
  * converter.setFontsPath("/custom/fonts");
- * 
+ *
  * // 执行转换
  * File result = converter.convert(document, DocumentFormat.PDF);
  * </pre>
@@ -159,7 +159,7 @@ public abstract class AbstractFileConverter implements FileConverter {
      * // 设置为A3尺寸
      * converter.setConvertWidth(297);
      * converter.setConvertHeight(420);
-     * 
+     *
      * // 设置为自定义尺寸
      * converter.setConvertWidth(200);
      * converter.setConvertHeight(300);
@@ -306,7 +306,7 @@ public abstract class AbstractFileConverter implements FileConverter {
         String fonts = getFontsPath();
         fontSettings.setFontsFolders(new String[]{fonts}, true);
         doc.setFontSettings(fontSettings);
-        
+
         // 设置文档中每一节的页面宽高
         for (Section section : doc.getSections()) {
             PageSetup pageSetup = section.getPageSetup();
@@ -315,7 +315,7 @@ public abstract class AbstractFileConverter implements FileConverter {
         }
 
         // PDF格式特殊处理
-        if (options instanceof PdfSaveOptions){
+        if (options instanceof PdfSaveOptions) {
             PdfSaveOptions pdfSaveOptions = (PdfSaveOptions) options;
             pdfSaveOptions.setEmbedFullFonts(true);
         }
@@ -325,8 +325,16 @@ public abstract class AbstractFileConverter implements FileConverter {
         options.setSaveFormat(type.getValue());
         options.setUseHighQualityRendering(true);
         options.setPrettyFormat(true);
-        
+
         return options;
+    }
+
+    public static void main(String[] args) {
+        SaveOptions options = new PdfSaveOptions();
+
+        SaveOptions options1 = SaveOptions.createSaveOptions(DocumentFormat.PDF.getValue());
+
+        System.out.println(options.getDefaultTemplate());
     }
 
     /**
@@ -405,7 +413,7 @@ public abstract class AbstractFileConverter implements FileConverter {
      * <pre>
      * String fontsPath = converter.getFontsPath();
      * System.out.println("当前字体路径: " + fontsPath);
-     * 
+     *
      * // 检查字体目录是否存在
      * File fontsDir = new File(fontsPath);
      * if (fontsDir.exists() && fontsDir.isDirectory()) {
@@ -455,7 +463,7 @@ public abstract class AbstractFileConverter implements FileConverter {
      * // 设置A4页面尺寸
      * double widthPoints = convertMmToPoints(210);   // 595.28点
      * double heightPoints = convertMmToPoints(297);  // 841.89点
-     * 
+     *
      * // 设置自定义页面尺寸
      * double customWidth = convertMmToPoints(200);   // 566.93点
      * double customHeight = convertMmToPoints(300);  // 850.39点

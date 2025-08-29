@@ -6,6 +6,7 @@ import cc.anqin.doc.utils.FileUtils;
 import cn.hutool.core.io.FileUtil;
 import com.aspose.words.Document;
 import com.aspose.words.SaveFormat;
+import com.aspose.words.SaveOptions;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -35,7 +36,7 @@ import java.io.OutputStream;
  * <pre>
  * // 基础转换
  * File pdfFile = CF.create("document.docx").toFile(DocumentFormat.PDF);
- * 
+ *
  * // 自定义尺寸转换
  * File customPdf = CF.create("document.docx", 297, 420)  // A3尺寸
  *     .output("output.pdf")
@@ -118,6 +119,15 @@ public class CF {
      * </p>
      */
     private CF() {
+    }
+
+    /**
+     * 获取 默认文件转换器
+     *
+     * @return {@link FileConverter }
+     */
+    public static FileConverter create() {
+        return new DefaultFileConvert();
     }
 
     /**
@@ -243,6 +253,22 @@ public class CF {
     }
 
     /**
+     * 执行文件转换操作
+     * <p>
+     * 转换完成后返回转换后的文件对象，如果未指定输出文件，系统会生成临时文件。
+     * </p>
+     *
+     * @param options 目标文件格式
+     * @return 转换后的文件对象
+     * @throws IllegalArgumentException 如果format为null
+     * @throws DocumentException 如果转换过程中发生错误
+     */
+    public File toFile(SaveOptions options) {
+        this.format = DocumentFormat.fromSaveOptions(options);
+        return execute();
+    }
+
+    /**
      * 执行文件转换操作（使用自定义转换器）
      * <p>
      * 该方法允许用户使用自定义的文件转换器进行格式转换，提供更大的灵活性。
@@ -263,6 +289,7 @@ public class CF {
             throw new RuntimeException(e);
         }
     }
+
 
     /**
      * 执行文件转换核心逻辑

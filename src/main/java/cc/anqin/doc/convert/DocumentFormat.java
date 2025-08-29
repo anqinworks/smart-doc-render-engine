@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import com.aspose.words.SaveOptions;
 import com.aspose.words.SaveFormat;
 import com.aspose.words.*;
@@ -37,16 +38,16 @@ import com.aspose.words.*;
  * <pre>
  * // 获取PDF格式
  * DocumentFormat pdfFormat = DocumentFormat.PDF;
- * 
+ *
  * // 检查是否为Word格式
  * boolean isWord = pdfFormat.isWordFormat(); // false
- * 
+ *
  * // 获取文件扩展名
  * String ext = pdfFormat.getExtensionWithDot(); // ".pdf"
- * 
+ *
  * // 创建保存选项
  * SaveOptions options = pdfFormat.createSaveOptions();
- * 
+ *
  * // 根据扩展名查找格式
  * DocumentFormat format = DocumentFormat.fromExtension("docx");
  * </pre>
@@ -529,7 +530,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat pdf = DocumentFormat.PDF;
      * String ext = pdf.getExtensionWithDot(); // ".pdf"
-     * 
+     *
      * // 构建文件名
      * String fileName = "document" + pdf.getExtensionWithDot(); // "document.pdf"
      * </pre>
@@ -618,6 +619,27 @@ public enum DocumentFormat {
     }
 
     /**
+     * 根据SaveOptions获取枚举实例
+     *
+     * @param options 选项
+     * @return {@link DocumentFormat }
+     */
+    public static DocumentFormat fromSaveOptions(SaveOptions options) {
+        if (options == null) {
+            throw new IllegalArgumentException("SaveOptions 不能为 null");
+        }
+
+        Class<?> optionsClass = options.getClass();
+        for (DocumentFormat format : values()) {
+            SaveOptions formatOptions = format.createSaveOptions();
+            if (formatOptions != null && formatOptions.getClass().isAssignableFrom(optionsClass)) {
+                return format;
+            }
+        }
+        throw new IllegalArgumentException("未知的文档格式值: " + optionsClass.getSimpleName());
+    }
+
+    /**
      * 根据文件扩展名获取枚举实例（不带点号）
      * <p>
      * 该静态方法通过文件扩展名查找对应的DocumentFormat枚举实例。
@@ -638,7 +660,7 @@ public enum DocumentFormat {
      * try {
      *     DocumentFormat format = DocumentFormat.fromExtension("docx");
      *     System.out.println(format); // "DOCX (docx) - Word Document"
-     *     
+     *
      *     // 带点号的扩展名也可以
      *     DocumentFormat pdf = DocumentFormat.fromExtension(".pdf");
      *     System.out.println(pdf); // "PDF (pdf) - Portable Document Format"
@@ -684,7 +706,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat docx = DocumentFormat.DOCX;
      * boolean isWord = docx.isWordFormat(); // true
-     * 
+     *
      * DocumentFormat pdf = DocumentFormat.PDF;
      * boolean isWord = pdf.isWordFormat(); // false
      * </pre>
@@ -719,7 +741,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat png = DocumentFormat.PNG;
      * boolean isImage = png.isImageFormat(); // true
-     * 
+     *
      * DocumentFormat docx = DocumentFormat.DOCX;
      * boolean isImage = docx.isImageFormat(); // false
      * </pre>
@@ -756,7 +778,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat pdf = DocumentFormat.PDF;
      * boolean isFixed = pdf.isFixedLayoutFormat(); // true
-     * 
+     *
      * DocumentFormat html = DocumentFormat.HTML;
      * boolean isFixed = html.isFixedLayoutFormat(); // false
      * </pre>
@@ -793,7 +815,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat pdf = DocumentFormat.PDF;
      * boolean supportsEnc = pdf.supportsEncryption(); // true
-     * 
+     *
      * DocumentFormat html = DocumentFormat.HTML;
      * boolean supportsEnc = html.supportsEncryption(); // false
      * </pre>
@@ -829,7 +851,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat pdf = DocumentFormat.PDF;
      * boolean hasOptions = pdf.hasSpecificSaveOptions(); // true
-     * 
+     *
      * DocumentFormat docx = DocumentFormat.DOCX;
      * boolean hasOptions = docx.hasSpecificSaveOptions(); // false
      * </pre>
@@ -862,7 +884,7 @@ public enum DocumentFormat {
      * List&lt;String&gt; extensions = DocumentFormat.getAllExtensions();
      * System.out.println("支持的扩展名: " + extensions);
      * // 输出: [bmp, doc, docm, docx, dot, dotm, dotx, epub, gif, html, jpg, md, odt, ott, pdf, png, ps, rtf, svg, tiff, txt, xaml, xps, xml]
-     * 
+     *
      * // 检查文件扩展名是否支持
      * String fileExt = "docx";
      * boolean supported = extensions.contains(fileExt.toLowerCase());
@@ -900,7 +922,7 @@ public enum DocumentFormat {
      * <pre>
      * DocumentFormat pdf = DocumentFormat.PDF;
      * pdf.printFormatDetails();
-     * 
+     *
      * // 输出示例:
      * // === 格式详细信息 ===
      * // 名称: PDF
@@ -945,7 +967,7 @@ public enum DocumentFormat {
      * DocumentFormat pdf = DocumentFormat.PDF;
      * String str = pdf.toString();
      * System.out.println(str); // "PDF (pdf) - Portable Document Format"
-     * 
+     *
      * DocumentFormat docx = DocumentFormat.DOCX;
      * String str2 = docx.toString(); // "DOCX (docx) - Word Document"
      * </pre>

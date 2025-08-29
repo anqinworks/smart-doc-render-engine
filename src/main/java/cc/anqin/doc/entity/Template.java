@@ -1,5 +1,6 @@
 package cc.anqin.doc.entity;
 
+import cc.anqin.doc.word.annotation.Placeholder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -29,12 +30,12 @@ import java.io.Serializable;
  * public class MyTemplate extends Template {
  *     private String name;
  *     private String address;
- *     
+ *
  *     &#064;Override
  *     public String getFileName() {
  *         return "自定义模板";
  *     }
- *     
+ *
  *     // 自定义转换尺寸
  *     public MyTemplate() {
  *         setConvertWidth(800);
@@ -58,7 +59,7 @@ import java.io.Serializable;
  * @author Mr.An
  * @date 2024/11/18
  * @see TemplateInterface 模板接口
- * @see AsposePlaceholder 模板占位符接口
+ * @see Placeholder 模板占位符接口
  * @see Serializable Java序列化接口
  */
 @Data
@@ -82,10 +83,10 @@ public abstract class Template implements TemplateInterface, Serializable {
      * </p>
      * <p>
      * 建议根据实际内容需求设置合理的宽度值，避免内容显示异常或布局混乱。
-     * 默认值为0，表示使用系统默认设置。
+     * 默认值为210，表示使用系统默认设置。
      * </p>
      */
-    private int convertWidth;
+    private double convertWidth = 210;
 
     /**
      * 转换高度 - 模板内容在转换过程中的高度设置
@@ -103,10 +104,10 @@ public abstract class Template implements TemplateInterface, Serializable {
      * </p>
      * <p>
      * 高度值应该与宽度值保持合理的比例，确保内容的视觉效果良好。
-     * 默认值为0，表示使用系统默认设置。
+     * 默认值为297，表示使用系统默认设置。
      * </p>
      */
-    private int convertHeight;
+    private double convertHeight = 297;
 
     /**
      * 变量前缀 - 模板中占位符变量的前缀标识
@@ -175,10 +176,6 @@ public abstract class Template implements TemplateInterface, Serializable {
      */
     public static Template defaultTemplate() {
         return new Template() {
-            @Override
-            public String getFileName() {
-                return "默认模板";
-            }
         };
     }
 }

@@ -1,9 +1,10 @@
 package cc.anqin.doc.word;
 
-import cc.anqin.doc.entity.AsposePlaceholder;
 import cc.anqin.doc.entity.Template;
+import cc.anqin.doc.entity.TemplateInterface;
 import cc.anqin.doc.ex.DocumentException;
 import cc.anqin.doc.utils.FileUtils;
+import cc.anqin.doc.word.annotation.Placeholder;
 import cc.anqin.doc.word.placeholder.DynamicRowPlaceholderFiller;
 import cc.anqin.doc.word.placeholder.ImagePlaceholderFiller;
 import cc.anqin.doc.word.placeholder.PlaceholderFillerService;
@@ -19,7 +20,6 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
@@ -58,7 +58,7 @@ import java.util.List;
  *
  * @author Mr.An
  * @date 2024/11/22
- * @see AsposePlaceholder 模板占位符接口
+ * @see Placeholder 模板占位符接口
  * @see PlaceholderFillerService 占位符填充服务接口
  * @see TextPlaceholderFiller 文本占位符填充器
  * @see ImagePlaceholderFiller 图片占位符填充器
@@ -94,7 +94,7 @@ public class PlaceholderFactory {
      * @throws IllegalArgumentException 如果任何参数为null
      * @throws DocumentException 如果模板填充过程中发生错误
      */
-    public <T extends AsposePlaceholder> Pair<File, File> fillTemplate(T source, File templateFile, File outputFile) {
+    public <T extends TemplateInterface> Pair<File, File> fillTemplate(T source, File templateFile, File outputFile) {
         Pair<File, File> pair = fillTemplate(source, templateFile);
         FileUtil.copy(pair.getValue(), outputFile, false);
         pair.setValue(outputFile);
@@ -126,7 +126,7 @@ public class PlaceholderFactory {
      * @throws IllegalArgumentException 如果任何参数为null
      * @throws DocumentException 当文档处理过程中发生错误时抛出
      */
-    public <T extends AsposePlaceholder> Pair<File, File> fillTemplate(T source, File templateFile) {
+    public <T extends TemplateInterface> Pair<File, File> fillTemplate(T source, File templateFile) {
 
         File templateRecord = FileUtils.getTemporaryFile(String.format("-random-%s.docx", RandomUtil.randomNumbers(5)));
 
@@ -145,7 +145,7 @@ public class PlaceholderFactory {
             parallelExecuteStrategy(doc, source);
 
             doc.save(Files.newOutputStream(templateRecord.toPath()), SaveFormat.DOCX);
-            log.info("用户:{} 文档记录生成成功：{}", source.getFileName(), templateRecord.getAbsolutePath());
+            log.info("模板:{} 文档记录生成成功：{}", templateFile.getName(), templateRecord.getAbsolutePath());
 
             // 清除变量
             Document docClearVariable = doc(templateRecord);
@@ -154,12 +154,12 @@ public class PlaceholderFactory {
 
             docClearVariable.save(Files.newOutputStream(clearVariable.toPath()), SaveFormat.DOCX);
 
-            log.info("用户:{} 文档生成成功：{}", source.getFileName(), clearVariable.getAbsolutePath());
+            log.info("模板:{} 文档生成成功：{}", templateFile.getName(), clearVariable.getAbsolutePath());
 
             // key 作为 docx 模板记录，value 作为 要转换的 PDF 文件
             return MutablePair.of(templateRecord, clearVariable);
         } catch (Exception e) {
-            log.error("文件:{} 文档生成失败，error：{}", source.getFileName(), ExceptionUtil.stacktraceToString(e));
+            log.error("模板:{} 文档生成失败，error：{}", templateFile.getName(), ExceptionUtil.stacktraceToString(e));
             throw new DocumentException(e);
         }
     }
@@ -196,7 +196,7 @@ public class PlaceholderFactory {
      * @param entity 包含填充数据的实体对象，必须实现AsposePlaceholder接口
      * @param <T> 实体类型，必须实现AsposePlaceholder接口
      */
-    private <T extends AsposePlaceholder> void
+    private <T extends TemplateInterface> void
     parallelExecuteStrategy(Document doc, T entity) {
         getStrategy().parallelStream().forEach(f -> f.create(f.supports(entity.getClass()), doc, entity).filler());
     }
@@ -226,7 +226,7 @@ public class PlaceholderFactory {
      * @param doc 要清理的Aspose文档对象
      * @param placeholder 用于清理的占位符模板，定义了占位符的前缀和后缀
      */
-    private void executeClearVariable(Field[] fields, Document doc, AsposePlaceholder placeholder) {
+    private void executeClearVariable(Field[] fields, Document doc, TemplateInterface placeholder) {
         getStrategy().parallelStream().forEach(r -> r.setEntity(placeholder).empty(doc, r.supports(fields)));
     }
 

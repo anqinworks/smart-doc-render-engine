@@ -2,6 +2,7 @@ package cc.anqin.doc.convert;
 
 import cn.hutool.core.util.ObjUtil;
 import com.aspose.words.Document;
+import com.aspose.words.SaveOptions;
 
 import java.io.File;
 import java.util.Set;
@@ -49,6 +50,24 @@ public interface FileConverter {
      * @throws RuntimeException 如果转换过程中发生错误
      */
     File convert(Document doc, DocumentFormat type);
+
+
+    /**
+     * 将Aspose文档对象转换为指定格式
+     * <p>
+     * 该方法将Aspose Words的Document对象转换为指定的文件格式，使用默认的转换设置。
+     * 转换过程中会应用字体设置、页面尺寸等配置，确保输出质量。
+     * </p>
+     *
+     * @param doc 要转换的Aspose文档对象，不能为null
+     * @param options 选项
+     * @return 转换后的文件对象，如果转换失败则返回null
+     *
+     */
+    default File convert(Document doc, SaveOptions options) {
+        return convert(doc, DocumentFormat.fromSaveOptions(options));
+    }
+
 
     /**
      * 将Aspose文档对象转换为指定格式（带自定义参数）

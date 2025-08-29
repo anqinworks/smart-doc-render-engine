@@ -23,6 +23,8 @@ import java.util.List;
 @AutoToMap
 public class RewardReturn extends Template {
 
+
+
     /**
      * 政务国家标准名称
      */
@@ -180,22 +182,11 @@ public class RewardReturn extends Template {
             dynamicRow = @Placeholder.DynamicRow(ChildrenTable.class))
     private List<ChildrenTable> childrenTable;
 
-
-    /**
-     * 获取文件名称
-     *
-     * @return {@link String }
-     */
-    @Override
-    public String getFileName() {
-        return "计划生育奖励";
-    }
-
     /**
      * 宽度
      */
     @Override
-    public int getConvertWidth() {
+    public double getConvertWidth() {
         return 200;
     }
 
@@ -203,7 +194,7 @@ public class RewardReturn extends Template {
      * 高度
      */
     @Override
-    public int getConvertHeight() {
+    public double getConvertHeight() {
         return 500;
     }
 

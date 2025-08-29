@@ -5,12 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="修改部分功能">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/VariableUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/VariableUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/entity/RewardReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/entity/RewardReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +54,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DefaultFileConvert.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" root0="SKIP_INSPECTION" />
@@ -99,11 +106,13 @@
     "project.structure.side.proportion": "0.3",
     "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true",
+    "应用程序.AbstractFileConverter.executor": "Debug",
     "应用程序.AsposeRegister.executor": "Run",
     "应用程序.DocConverter.executor": "Run",
-    "应用程序.DocumentFormat.executor": "Debug",
+    "应用程序.DocumentFormat.executor": "Run",
     "应用程序.DocxToPdfConverter.executor": "Run",
     "应用程序.FileDownloader.executor": "Debug",
+    "应用程序.PlaceholderFactory.executor": "Debug",
     "应用程序.Test1.executor": "Debug",
     "应用程序.VariableUtils.executor": "Run"
   }
@@ -123,13 +132,13 @@
       <recent name="C:\workspace\smart-doc-render-engine" />
     </key>
   </component>
-  <component name="RunManager" selected="应用程序.VariableUtils">
-    <configuration name="AsposeRegister" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.test.AsposeRegister" />
+  <component name="RunManager" selected="应用程序.DocumentFormat">
+    <configuration name="AbstractFileConverter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.AbstractFileConverter" />
       <module name="smart-doc-render-engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cc.anqin.doc.test.*" />
+          <option name="PATTERN" value="cc.anqin.doc.convert.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -150,12 +159,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileDownloader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.utils.FileDownloader" />
+    <configuration name="PlaceholderFactory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.word.PlaceholderFactory" />
       <module name="smart-doc-render-engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cc.anqin.doc.utils.*" />
+          <option name="PATTERN" value="cc.anqin.doc.word.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -191,11 +200,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="应用程序.DocumentFormat" />
+        <item itemvalue="应用程序.AbstractFileConverter" />
+        <item itemvalue="应用程序.PlaceholderFactory" />
         <item itemvalue="应用程序.VariableUtils" />
         <item itemvalue="应用程序.Test1" />
-        <item itemvalue="应用程序.FileDownloader" />
-        <item itemvalue="应用程序.DocumentFormat" />
-        <item itemvalue="应用程序.AsposeRegister" />
       </list>
     </recent_temporary>
   </component>
@@ -219,7 +228,7 @@
       <workItem from="1755569059331" duration="19503000" />
       <workItem from="1755655716300" duration="2032000" />
       <workItem from="1756281175820" duration="36110000" />
-      <workItem from="1756433935198" duration="4060000" />
+      <workItem from="1756433935198" duration="10571000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -293,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756379050216</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1756440541541</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1756440541543</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,6 +348,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java</url>
           <line>186</line>
           <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java</url>
+          <line>336</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
