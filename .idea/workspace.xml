@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="修改部分功能">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/AsposePlaceholder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/Template.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/entity/TemplateInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/entity/RewardReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/entity/RewardReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileDownloader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileDownloader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/AbstractPlaceholderFillerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,12 +34,12 @@
     &quot;assignee&quot;: &quot;anqinworks&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/anqinworks/smart-doc-render-engine.git&quot;,
-    &quot;accountId&quot;: &quot;94286a07-3d07-4cd8-bf61-62f2ba5e94dd&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/anqinworks/smart-doc-render-engine",
+    "accountId": "94286a07-3d07-4cd8-bf61-62f2ba5e94dd"
   }
-}</component>
+}]]></component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="true" />
   </component>
@@ -87,6 +78,7 @@
     "Maven.smart-doc-render-engine [test].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
@@ -104,7 +96,7 @@
     "project.structure.last.edited": "项目",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.3",
-    "settings.editor.selected.configurable": "MavenSettings",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
     "应用程序.AbstractFileConverter.executor": "Debug",
     "应用程序.AsposeRegister.executor": "Run",
@@ -229,6 +221,7 @@
       <workItem from="1755655716300" duration="2032000" />
       <workItem from="1756281175820" duration="36110000" />
       <workItem from="1756433935198" duration="10571000" />
+      <workItem from="1756462930217" duration="1606000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />

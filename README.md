@@ -41,7 +41,7 @@ Smart Doc Render Engine 是一个基于 Java 的智能文档渲染引擎，支�
 <dependency>
     <groupId>io.github.anqinworks</groupId>
     <artifactId>smart-doc-render-engine</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
