@@ -1,14 +1,14 @@
 package cc.anqin.doc.utils;
 
+import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.ex.DocumentException;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.codec.Base64Decoder;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.file.PathUtil;
 import cn.hutool.core.lang.Opt;
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.util.URLUtil;
-import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 
@@ -17,9 +17,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import java.io.Serializable;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * 文件工具类
@@ -40,8 +41,6 @@ import java.nio.file.Files;
  * <p>
  * 使用示例：
  * <pre>
- * // 创建临时文件
- * File tempFile = FileUtils.getTemporaryFile(".docx");
  *
  * // 从URL下载文件
  * File downloadedFile = FileUtils.downloadFile("https://example.com/sample.docx", tempFile);
@@ -56,19 +55,40 @@ import java.nio.file.Files;
  *
  * @author Mr.An
  * @date 2024/11/13
- * @see java.io.File Java文件操作
- * @see org.apache.tika.Tika Apache Tika文件类型检测
- * @see cn.hutool.core.io.FileUtil Hutool文件工具
+ * @see File Java文件操作
+ * @see Tika Apache Tika文件类型检测
+ * @see FileUtil Hutool文件工具
  */
 @Slf4j
+@UtilityClass
 public class FileUtils {
 
+    public static String TEMP_DIR;
 
     /**
-     * 临时路径
+     * 获取临时目录 可修改：System.setProperty("smart.doc.temp.dir", "D:/temp/");
+     *
+     * @return {@link String }
      */
-    @Getter
-    public static final String TEMP_PATH = FileUtil.getTmpDir().getAbsolutePath();
+    public static String getTempDir() {
+        if (TEMP_DIR == null) {
+            TEMP_DIR = StrUtil.blankToDefault(
+                    System.getProperty("smart.doc.temp.dir"),
+                    FileUtil.getTmpDirPath()
+            );
+            FileUtil.mkdir(TEMP_DIR);
+        }
+        return TEMP_DIR;
+    }
+
+    /**
+     * 获取临时路径
+     *
+     * @return {@link Path }
+     */
+    public static Path getTempPath() {
+        return Paths.get(getTempDir());
+    }
 
     /**
      * 获取临时文件
@@ -80,10 +100,16 @@ public class FileUtils {
      * @param suffix 文件后缀，例如 ".docx"、".pdf" 等
      * @return 创建的临时文件对象
      */
-    public static File getTemporaryFile(String suffix) {
-        return new File(TEMP_PATH + File.separator + UUID.randomUUID().toString(false) + suffix);
+    public static Path getTemporaryFile(DocumentFormat suffix) {
+        if (suffix == null) {
+            throw new IllegalArgumentException("suffix can not be null");
+        }
+        try {
+            return Files.createTempFile(getTempPath(), "smart-doc", suffix.getExtensionWithDot());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     /**
      * 从 URL 下载文件到指定路径
@@ -114,7 +140,7 @@ public class FileUtils {
      * @return 下载完成的本地文件对象
      * @throws IOException ioexception
      */
-    public static File downloadFile(String fileUrl, String saveDir,String fileName) throws IOException {
+    public static File downloadFile(String fileUrl, String saveDir, String fileName) throws IOException {
         return FileDownloader.downloadFile(fileUrl, saveDir, fileName);
     }
 
@@ -159,7 +185,7 @@ public class FileUtils {
 
         byte[] decoded = Base64Decoder.decode(base64);
 
-        File temporaryFile = FileUtils.getTemporaryFile("." + detectExtension(decoded));
+        File temporaryFile = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(detectExtension(decoded))).toFile();
 
         return FileUtil.writeBytes(decoded, temporaryFile);
     }

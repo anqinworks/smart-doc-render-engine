@@ -56,6 +56,7 @@ public class Test1 {
     }
 
     public static void main(String[] args) {
+        System.setProperty("smart.doc.temp.dir", "D:/temp/");
 
         // 输入和输出文件路径
         ClassPathResource resource = new ClassPathResource("template/奖励金申报表.docx");
@@ -63,15 +64,18 @@ public class Test1 {
         File tamplateFile = resource.getFile();
 
         FT<RewardReturn> ft = FT.of(get(), tamplateFile);
+        try {
+            File recordFile = ft.getRecordFile();
 
-        File recordFile = ft.getRecordFile();
+            System.out.println("记录文档生成成功：" + recordFile.getAbsolutePath());
+            File currentFile = ft.getCurrentFile();
 
-        System.out.println("记录文档生成成功：" + recordFile.getAbsolutePath());
-        File currentFile = ft.getCurrentFile();
+            System.out.println("当前文档生成成功：" + currentFile.getAbsolutePath());
+            File pdf = ft.convert(DocumentFormat.PDF);
 
-        System.out.println("当前文档生成成功：" + currentFile.getAbsolutePath());
-        File pdf = ft.convert(DocumentFormat.PDF);
-
-        System.out.println("转换文档生成成功：" + pdf.getAbsolutePath());
+            System.out.println("转换文档生成成功：" + pdf.getAbsolutePath());
+        } finally {
+            ft.clearAll();
+        }
     }
 }

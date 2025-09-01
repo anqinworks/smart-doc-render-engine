@@ -1,5 +1,6 @@
 package cc.anqin.doc.word;
 
+import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.entity.Template;
 import cc.anqin.doc.entity.TemplateInterface;
 import cc.anqin.doc.ex.DocumentException;
@@ -130,10 +131,10 @@ public class PlaceholderFactory {
      */
     public <T extends TemplateInterface> Pair<File, File> fillTemplate(T source, File templateFile) {
 
-        File templateRecord = FileUtils.getTemporaryFile(String.format("-random-%s.docx", RandomUtil.randomNumbers(5)));
+        File templateRecord = FileUtils.getTemporaryFile(DocumentFormat.DOCX).toFile();
 
         // 获取清空变量的文件
-        File clearVariable = FileUtils.getTemporaryFile(String.format("-random-%s.docx", RandomUtil.randomNumbers(5)));
+        File clearVariable = FileUtils.getTemporaryFile(DocumentFormat.DOCX).toFile();
 
         // 加载模板并处理
         try {

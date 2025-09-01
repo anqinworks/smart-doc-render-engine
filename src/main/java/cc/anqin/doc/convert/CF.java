@@ -309,7 +309,7 @@ public class CF {
     private File execute() {
         try {
             if (this.outputFile == null) {
-                this.outputFile = FileUtils.getTemporaryFile(format.getExtensionWithDot());
+                this.outputFile = FileUtils.getTemporaryFile(format).toFile();
             }
             return new DefaultFileConvert()
                     .convert(this.outputFile, document, this.width, this.height, format);

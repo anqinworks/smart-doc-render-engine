@@ -5,7 +5,7 @@
 
     <groupId>io.github.anqinworks</groupId>
     <artifactId>smart-doc-render-engine</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
     <name>smart-doc-render-engine</name>
     <description>Smart Doc Render Engine 是一个基于 Java 的智能文档渲染引擎，支持 DOCX 模板 和 HTML 动态渲染，并导出为 PDF 或其他格式。它提供灵活的模板变量替换、动态内容生成，适用于报告生成、合同自动化、电子发票等场景。</description>
     <url>https://github.com/anqinworks/smart-doc-render-engine</url>

@@ -198,11 +198,11 @@ public abstract class AbstractFileConverter implements FileConverter {
      * @return 转换后的文件对象，如果转换失败则返回null
      * @see Document Aspose文档对象
      * @see DocumentFormat 文档格式枚举
-     * @see FileUtils#getTemporaryFile(String) 临时文件工具
+     * @see FileUtils#getTemporaryFile(DocumentFormat) 临时文件工具
      */
     @Override
     public File convert(Document doc, DocumentFormat type) {
-        File temporaryFile = FileUtils.getTemporaryFile("." + type.getExtension());
+        File temporaryFile = FileUtils.getTemporaryFile(type).toFile();
         return convert(temporaryFile, doc, convertWidth, convertHeight, type);
     }
 
@@ -327,14 +327,6 @@ public abstract class AbstractFileConverter implements FileConverter {
         options.setPrettyFormat(true);
 
         return options;
-    }
-
-    public static void main(String[] args) {
-        SaveOptions options = new PdfSaveOptions();
-
-        SaveOptions options1 = SaveOptions.createSaveOptions(DocumentFormat.PDF.getValue());
-
-        System.out.println(options.getDefaultTemplate());
     }
 
     /**

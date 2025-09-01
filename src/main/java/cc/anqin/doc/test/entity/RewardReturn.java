@@ -150,7 +150,7 @@ public class RewardReturn extends Template {
     /**
      * 街道盖章
      */
-    @Placeholder(value = PlaceholderType.PIC, pic = @Placeholder.PicWord(width = 100, height = 100))
+    @Placeholder(value = PlaceholderType.PIC, pic = @Placeholder.PicWord(width = 60, height = 60))
     private String streetStamp;
 
     /**

@@ -14,9 +14,11 @@ import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.lang.Opt;
 import cn.hutool.core.util.URLUtil;
 import com.aspose.words.*;
+import com.aspose.words.Shape;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 
+import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -210,10 +212,11 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
                     // 未填充该占位符，添加
                     filled.add(placeholderText);
 
-
                     try {
-                        BufferedInputStream inputStream = FileUtil.getInputStream(image);
-                        builder.insertImage(inputStream, pic.width(), pic.height());
+                        try (BufferedInputStream inputStream = FileUtil.getInputStream(image)) {
+                            builder.insertImage(inputStream, pic.width(), pic.height());
+                        }
+
                     } catch (Exception e) {
                         log.error("插入图片失败 -  内存使用: {}/{} MB, ERROR：{}",
                                 Runtime.getRuntime().totalMemory() / 1024 / 1024,
@@ -247,17 +250,17 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
             if (o instanceof byte[]) {
                 byte[] bytes = (byte[]) o;
                 String extension = FileUtils.parseExtension(new Tika().detect(bytes));
-                File temporaryFile = FileUtils.getTemporaryFile("." + extension);
-                Files.write(temporaryFile.toPath(), bytes);
-                image = temporaryFile;
+                Path temporaryPath = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(extension));
+                Files.write(temporaryPath, bytes);
+                image = temporaryPath.toFile();
             }
 
             if (o instanceof InputStream) {
                 InputStream inputStream = (InputStream) o;
                 String extension = FileUtils.parseExtension(new Tika().detect(inputStream));
-                File temporaryFile = FileUtils.getTemporaryFile("." + extension);
-                Files.copy(inputStream, temporaryFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                image = temporaryFile;
+                Path temporaryPath = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(extension));
+                Files.copy(inputStream, temporaryPath, StandardCopyOption.REPLACE_EXISTING);
+                image = temporaryPath.toFile();
             }
 
             if (o instanceof Path) {
@@ -266,8 +269,12 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
             }
             if (!isValidFile(image)) {
                 log.info("无效文件，使用默认图片");
-                ClassPathResource resource = new ClassPathResource("img/default.png");
-                image = resource.getFile();
+                try {
+                    ClassPathResource resource = new ClassPathResource("img/default.png");
+                    image = resource.getFile();
+                } catch (Exception e) {
+                    log.warn("未找到默认图片");
+                }
             }
             return image;
         } catch (Exception e) {
@@ -292,7 +299,7 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
     protected static File downloadTemplate(String fileUrl) {
         try {
             log.info("下载文件URL：{}", fileUrl);
-            return FileUtils.downloadFile(fileUrl, FileUtils.getTEMP_PATH());
+            return FileUtils.downloadFile(fileUrl, FileUtil.getTmpDirPath());
         } catch (Exception e) {
             log.error(ExceptionUtil.stacktraceToString(e));
             log.info("下载失败 URL：{} 使用默认图片", fileUrl, e);

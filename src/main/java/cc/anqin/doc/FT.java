@@ -4,15 +4,20 @@ import cc.anqin.doc.convert.AbstractFileConverter;
 import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.entity.TemplateInterface;
+import cc.anqin.doc.utils.FileUtils;
 import cc.anqin.doc.utils.Pair;
 import cc.anqin.doc.word.PlaceholderFactory;
 import cc.anqin.doc.word.annotation.Placeholder;
 import cn.hutool.core.io.FileUtil;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 模板填充工具类 - 用于处理Aspose模板填充操作
@@ -30,14 +35,6 @@ import java.io.File;
  *   <li>自动文件管理 - 自动处理临时文件和输出文件</li>
  * </ul>
  * </p>
- * <p>
- * 使用示例：
- * <pre>
- * MyTemplate template = new MyTemplate().setName("示例文档");
- * Pair&lt;File, File&gt; result = FT.of(template, new File("template.docx"))
- *     .fillAndConvert();
- * </pre>
- * </p>
  *
  * @param <T> 模板占位符实体类型，必须继承自AsposePlaceholder
  * @author Mr.An
@@ -48,6 +45,9 @@ import java.io.File;
  * @see DocumentFormat 文档格式枚举
  */
 @Data
+@Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Accessors(chain = true)
 @Setter(AccessLevel.PRIVATE)
 public class FT<T extends TemplateInterface> {
@@ -171,7 +171,7 @@ public class FT<T extends TemplateInterface> {
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
     public File convert(DocumentFormat fileType) {
-        return CF.create(currentFile).toFile(fileType);
+        return outputFile = CF.create(currentFile).toFile(fileType);
     }
 
     /**
@@ -188,7 +188,7 @@ public class FT<T extends TemplateInterface> {
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
     public <C extends AbstractFileConverter> File convert(C converter) {
-        return CF.create(currentFile).toFile(converter);
+        return outputFile = CF.create(currentFile).toFile(converter);
     }
 
     /**
@@ -206,7 +206,53 @@ public class FT<T extends TemplateInterface> {
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
     public File convert(DocumentFormat fileType, int width, int height) {
-        return CF.create(FileUtil.getInputStream(currentFile), width, height).toFile(fileType);
+        return outputFile = CF.create(FileUtil.getInputStream(currentFile), width, height).toFile(fileType);
+    }
+
+    /**
+     * <p>清理所有临时文件</p>
+     *
+     * 该方法会安全地删除所有已设置的临时文件，包括：
+     * <li>记录文件 (recordFile)</li>
+     * <li>当前处理文件 (currentFile)</li>
+     * <li>输出文件 (outputFile)</li>
+     * <p>特性：</p>
+     * <li>线程安全：可多线程环境下调用</li>
+     * <li>空值安全：自动跳过null文件引用</li>
+     * <li>异常安全：单个文件删除失败不会影响其他文件的删除操作</li>
+     * <li>幂等性：多次调用不会产生副作用</li>
+     *
+     * @throws SecurityException 如果安全管理器拒绝删除操作
+     */
+    public void clearAll() {
+        // 收集所有需要清理的文件引用
+        List<File> filesToDelete = Arrays.asList(recordFile, currentFile, outputFile);
+
+        // 遍历并清理每个文件
+        filesToDelete.stream()
+                .filter(Objects::nonNull) // 过滤掉null引用
+                .forEach(this::deleteFileSafely); // 安全删除文件
+    }
+
+    /**
+     * 安全删除单个文件
+     *
+     * @param file 要删除的文件，如果为null则直接返回
+     */
+    private void deleteFileSafely(File file) {
+        if (file == null || !file.exists()) {
+            return;
+        }
+
+        try {
+            Files.deleteIfExists(file.toPath());
+            log.debug("已成功删除临时文件 : {}", file.getAbsolutePath());
+        } catch (SecurityException e) {
+            log.error("安全管理器阻止删除文件: {}", file.getAbsolutePath(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("删除临时文件失败: {}", file.getAbsolutePath(), e);
+        }
     }
 
     /**
