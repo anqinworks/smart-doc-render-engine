@@ -309,7 +309,7 @@ public class CF {
     private File execute() {
         try {
             if (this.outputFile == null) {
-                this.outputFile = FileUtils.getTemporaryFile(format).toFile();
+                this.outputFile = FileUtils.getTemporaryFile(format);
             }
             return new DefaultFileConvert()
                     .convert(this.outputFile, document, this.width, this.height, format);

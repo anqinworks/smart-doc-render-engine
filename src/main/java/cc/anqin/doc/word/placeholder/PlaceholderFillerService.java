@@ -97,6 +97,5 @@ public interface PlaceholderFillerService {
      * @param doc    要处理的Word文档对象
      * @param fields 需要清空占位符的字段数组
      */
-    @SneakyThrows
     void empty(Document doc, Field... fields);
 }

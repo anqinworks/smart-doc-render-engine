@@ -9,12 +9,14 @@ import cc.anqin.doc.utils.Pair;
 import cc.anqin.doc.word.PlaceholderFactory;
 import cc.anqin.doc.word.annotation.Placeholder;
 import cn.hutool.core.io.FileUtil;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -49,7 +51,6 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Accessors(chain = true)
-@Setter(AccessLevel.PRIVATE)
 public class FT<T extends TemplateInterface> {
 
     /**
@@ -71,15 +72,6 @@ public class FT<T extends TemplateInterface> {
     private File templateFile;
 
     /**
-     * 输出文件 - 填充后的文件输出路径（可选）
-     * <p>
-     * 该字段指定填充完成后的文档保存路径。如果为null，系统会自动生成
-     * 临时文件路径。用户可以通过此字段控制输出文件的位置和名称。
-     * </p>
-     */
-    private File outputFile;
-
-    /**
      * 记录文件 - 填充过程中生成的记录版本文件
      * <p>
      * 该字段存储模板填充过程中的中间文件，包含所有占位符替换后的内容。
@@ -98,6 +90,12 @@ public class FT<T extends TemplateInterface> {
     private File currentFile;
 
     /**
+     * 当前文件类型 - 填充后生成的最新版本文件
+     */
+    private DocumentFormat generateFileType;
+
+
+    /**
      * 创建FT实例（基础版）
      * <p>
      * 该静态工厂方法创建一个基础的FT实例，使用默认的A4尺寸设置。
@@ -114,33 +112,60 @@ public class FT<T extends TemplateInterface> {
     public static <T extends TemplateInterface> FT<T> of(T entity, File templateFile) {
         return new FT<T>()
                 .setEntity(entity)
-                .setTemplateFile(templateFile).fill();
+                .setTemplateFile(templateFile);
+    }
+
+
+    /**
+     * 创建FT实例（基础版）
+     * <p>
+     * 该静态工厂方法创建一个基础的FT实例，使用默认的A4尺寸设置。
+     * 创建后会自动执行模板填充操作，返回已填充的FT实例。
+     * </p>
+     *
+     * @param entity 模板数据实体，包含需要填充的数据
+     * @param templateFile 模板文件，包含占位符的原始文档
+     * @param generateFileType 生成文件类型
+     * @return 已填充的FT实例，支持链式调用
+     *
+     */
+    public static <T extends TemplateInterface> FT<T> of(T entity, File templateFile, DocumentFormat generateFileType) {
+        return new FT<T>()
+                .setEntity(entity)
+                .setTemplateFile(templateFile)
+                .setGenerateFileType(generateFileType);
     }
 
     /**
-     * 创建FT实例（带输出文件）
+     * 创建FT实例（基础版）
      * <p>
-     * 该静态工厂方法创建一个FT实例，并指定输出文件路径。
-     * 创建后会自动执行模板填充操作，并将结果保存到指定的输出文件。
+     * 该静态工厂方法创建一个基础的FT实例，使用默认的A4尺寸设置。
+     * 创建后会自动执行模板填充操作，返回已填充的FT实例。
      * </p>
      *
-     * @param <T> 模板占位符实体类型
      * @param entity 模板数据实体，包含需要填充的数据
      * @param templateFile 模板文件，包含占位符的原始文档
-     * @param outputFile 输出文件，指定填充后的文档保存路径
+     * @param generateFileType 生成文件类型
      * @return 已填充的FT实例，支持链式调用
-     * @throws IllegalArgumentException 如果任何参数为null
-     * @throws RuntimeException 如果模板填充过程中发生错误
+     *
      */
-    public static <T extends TemplateInterface> FT<T> of(T entity, File templateFile, File outputFile) {
-        return of(entity, templateFile)
-                .setOutputFile(outputFile).fill();
+    public static <T extends TemplateInterface> FT<T> of(T entity,
+                                                         File templateFile,
+                                                         File recordFile,
+                                                         File currentFile,
+                                                         DocumentFormat generateFileType) {
+        return new FT<T>()
+                .setEntity(entity)
+                .setTemplateFile(templateFile)
+                .setRecordFile(recordFile)
+                .setCurrentFile(currentFile)
+                .setGenerateFileType(generateFileType);
     }
 
     /**
      * 执行模板填充操作
      * <p>
-     * 该私有方法执行核心的模板填充逻辑，包括：
+     * 该方法执行核心的模板填充逻辑，包括：
      * <ol>
      *   <li>调用PlaceholderFactory进行模板填充</li>
      *   <li>设置记录文件和当前文件路径</li>
@@ -151,7 +176,7 @@ public class FT<T extends TemplateInterface> {
      * @return 当前FT实例（支持链式调用）
      * @throws RuntimeException 如果模板填充过程中发生错误
      */
-    private FT<T> fill() {
+    public FT<T> fer() {
         Pair<File, File> execute = execute();
         this.recordFile = execute.getKey();    // 设置记录文件
         this.currentFile = execute.getValue(); // 设置当前文件
@@ -170,8 +195,10 @@ public class FT<T extends TemplateInterface> {
      * @throws IllegalArgumentException 如果fileType为null
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
-    public File convert(DocumentFormat fileType) {
-        return outputFile = CF.create(currentFile).toFile(fileType);
+    public File deleteConvert(DocumentFormat fileType) {
+        File file = CF.create(currentFile).toFile(fileType);
+        FileUtils.deleteFileSafely(currentFile);
+        return currentFile = file;
     }
 
     /**
@@ -187,8 +214,43 @@ public class FT<T extends TemplateInterface> {
      * @throws IllegalArgumentException 如果converter为null
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
-    public <C extends AbstractFileConverter> File convert(C converter) {
-        return outputFile = CF.create(currentFile).toFile(converter);
+    public <C extends AbstractFileConverter> File deleteConvert(C converter) {
+        File file = CF.create(currentFile).toFile(converter);
+        FileUtils.deleteFileSafely(currentFile);
+        return currentFile = file;
+    }
+
+    /**
+     * 将当前文件转换为指定格式
+     * <p>
+     * 该方法使用默认的转换器将当前填充完成的文档转换为指定的文件格式。
+     * 转换过程会保持文档的原始布局和格式，确保输出质量。
+     * </p>
+     *
+     * @param fileType 目标文件类型，如PDF、HTML等
+     * @return 转换后的文件对象
+     * @throws IllegalArgumentException 如果fileType为null
+     * @throws RuntimeException 如果文件转换过程中发生错误
+     */
+    public File convertNewFile(DocumentFormat fileType) {
+        return CF.create(currentFile).toFile(fileType);
+    }
+
+    /**
+     * 使用自定义转换器将当前文件转换为指定格式
+     * <p>
+     * 该方法允许用户使用自定义的文件转换器进行格式转换，提供更大的灵活性。
+     * 自定义转换器可以实现特定的转换逻辑和优化策略。
+     * </p>
+     *
+     * @param converter 自定义文件转换器，必须继承自AbstractFileConverter
+     * @return 转换后的文件对象
+     * @param <C> 转换器类型，必须继承自AbstractFileConverter
+     * @throws IllegalArgumentException 如果converter为null
+     * @throws RuntimeException 如果文件转换过程中发生错误
+     */
+    public <C extends AbstractFileConverter> File convertNewFile(C converter) {
+        return CF.create(currentFile).toFile(converter);
     }
 
     /**
@@ -205,8 +267,10 @@ public class FT<T extends TemplateInterface> {
      * @throws IllegalArgumentException 如果fileType为null或尺寸参数无效
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
-    public File convert(DocumentFormat fileType, int width, int height) {
-        return outputFile = CF.create(FileUtil.getInputStream(currentFile), width, height).toFile(fileType);
+    public File deleteConvert(DocumentFormat fileType, int width, int height) {
+        File file = CF.create(FileUtil.getInputStream(currentFile), width, height).toFile(fileType);
+        FileUtils.deleteFileSafely(currentFile);
+        return currentFile = file;
     }
 
     /**
@@ -226,34 +290,14 @@ public class FT<T extends TemplateInterface> {
      */
     public void clearAll() {
         // 收集所有需要清理的文件引用
-        List<File> filesToDelete = Arrays.asList(recordFile, currentFile, outputFile);
+        List<File> filesToDelete = Arrays.asList(recordFile, currentFile);
 
         // 遍历并清理每个文件
         filesToDelete.stream()
                 .filter(Objects::nonNull) // 过滤掉null引用
-                .forEach(this::deleteFileSafely); // 安全删除文件
+                .forEach(FileUtils::deleteFileSafely); // 安全删除文件
     }
 
-    /**
-     * 安全删除单个文件
-     *
-     * @param file 要删除的文件，如果为null则直接返回
-     */
-    private void deleteFileSafely(File file) {
-        if (file == null || !file.exists()) {
-            return;
-        }
-
-        try {
-            Files.deleteIfExists(file.toPath());
-            log.debug("已成功删除临时文件 : {}", file.getAbsolutePath());
-        } catch (SecurityException e) {
-            log.error("安全管理器阻止删除文件: {}", file.getAbsolutePath(), e);
-            throw e;
-        } catch (Exception e) {
-            log.error("删除临时文件失败: {}", file.getAbsolutePath(), e);
-        }
-    }
 
     /**
      * 执行模板填充核心逻辑
@@ -270,11 +314,14 @@ public class FT<T extends TemplateInterface> {
      * @throws RuntimeException 如果模板填充过程中发生错误
      */
     private Pair<File, File> execute() {
-        if (outputFile == null) {
+        if (recordFile == null && currentFile == null) {
             // 无指定输出路径时使用默认填充方式
-            return PlaceholderFactory.fillTemplate(entity, templateFile);
+            if (generateFileType == null) {
+                generateFileType = DocumentFormat.fromFile(templateFile);
+            }
+            return PlaceholderFactory.fillTemplate(entity, templateFile, generateFileType);
         }
         // 有指定输出路径时使用带输出路径的填充方式
-        return PlaceholderFactory.fillTemplate(entity, templateFile, outputFile);
+        return PlaceholderFactory.fillTemplate(entity, templateFile, recordFile, currentFile, DocumentFormat.fromFile(currentFile));
     }
 }

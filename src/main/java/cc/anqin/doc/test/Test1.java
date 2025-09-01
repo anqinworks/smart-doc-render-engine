@@ -63,7 +63,7 @@ public class Test1 {
 
         File tamplateFile = resource.getFile();
 
-        FT<RewardReturn> ft = FT.of(get(), tamplateFile);
+        FT<RewardReturn> ft = FT.of(get(), tamplateFile, DocumentFormat.PDF).fer();
         try {
             File recordFile = ft.getRecordFile();
 
@@ -71,9 +71,6 @@ public class Test1 {
             File currentFile = ft.getCurrentFile();
 
             System.out.println("当前文档生成成功：" + currentFile.getAbsolutePath());
-            File pdf = ft.convert(DocumentFormat.PDF);
-
-            System.out.println("转换文档生成成功：" + pdf.getAbsolutePath());
         } finally {
             ft.clearAll();
         }

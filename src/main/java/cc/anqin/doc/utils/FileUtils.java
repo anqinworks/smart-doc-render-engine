@@ -100,16 +100,52 @@ public class FileUtils {
      * @param suffix 文件后缀，例如 ".docx"、".pdf" 等
      * @return 创建的临时文件对象
      */
-    public static Path getTemporaryFile(DocumentFormat suffix) {
+    public File getTemporaryFile(DocumentFormat suffix) {
+        return getTemporaryFile(suffix, "smart-doc");
+    }
+
+    /**
+     * 获取临时文件
+     * <p>
+     * 此方法创建一个带有指定后缀的临时文件，文件名基于当前时间戳生成，确保唯一性。
+     * 临时文件位于系统临时目录下，适用于需要临时存储数据的场景。
+     * </p>
+     *
+     * @param suffix 文件后缀，例如 ".docx"、".pdf" 等
+     * @return 创建的临时文件对象
+     */
+    public static File getTemporaryFile(DocumentFormat suffix, String prefix) {
         if (suffix == null) {
             throw new IllegalArgumentException("suffix can not be null");
         }
         try {
-            return Files.createTempFile(getTempPath(), "smart-doc", suffix.getExtensionWithDot());
+            return Files.createTempFile(getTempPath(), prefix, suffix.getExtensionWithDot()).toFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * 安全删除单个文件
+     *
+     * @param file 要删除的文件，如果为null则直接返回
+     */
+    public static void deleteFileSafely(File file) {
+        if (file == null || !file.exists()) {
+            return;
+        }
+
+        try {
+            Files.deleteIfExists(file.toPath());
+            log.debug("已成功删除临时文件 : {}", file.getAbsolutePath());
+        } catch (SecurityException e) {
+            log.error("安全管理器阻止删除文件: {}", file.getAbsolutePath(), e);
+            throw e;
+        } catch (Exception e) {
+            log.error("删除临时文件失败: {}", file.getAbsolutePath(), e);
+        }
+    }
+
 
     /**
      * 从 URL 下载文件到指定路径
@@ -185,7 +221,7 @@ public class FileUtils {
 
         byte[] decoded = Base64Decoder.decode(base64);
 
-        File temporaryFile = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(detectExtension(decoded))).toFile();
+        File temporaryFile = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(detectExtension(decoded)));
 
         return FileUtil.writeBytes(decoded, temporaryFile);
     }

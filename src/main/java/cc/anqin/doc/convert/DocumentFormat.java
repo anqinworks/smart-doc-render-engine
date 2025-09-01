@@ -1,10 +1,13 @@
 package cc.anqin.doc.convert;
 
+import cc.anqin.doc.utils.FileUtils;
+import cn.hutool.core.io.FileUtil;
 import com.aspose.words.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -638,6 +641,20 @@ public enum DocumentFormat {
         }
         throw new IllegalArgumentException("未知的文档格式值: " + optionsClass.getSimpleName());
     }
+
+    /**
+     * 根据File获取枚举实例
+     *
+     * @param file 文件
+     * @return {@link DocumentFormat }
+     */
+    public static DocumentFormat fromFile(File file) {
+        if (file == null) {
+            throw new IllegalArgumentException("file 不能为 null");
+        }
+        return fromExtension(FileUtil.getSuffix(file));
+    }
+
 
     /**
      * 根据文件扩展名获取枚举实例（不带点号）

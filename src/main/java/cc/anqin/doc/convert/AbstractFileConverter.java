@@ -202,7 +202,7 @@ public abstract class AbstractFileConverter implements FileConverter {
      */
     @Override
     public File convert(Document doc, DocumentFormat type) {
-        File temporaryFile = FileUtils.getTemporaryFile(type).toFile();
+        File temporaryFile = FileUtils.getTemporaryFile(type);
         return convert(temporaryFile, doc, convertWidth, convertHeight, type);
     }
 

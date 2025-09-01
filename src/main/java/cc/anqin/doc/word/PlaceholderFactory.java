@@ -21,6 +21,7 @@ import com.aspose.words.SaveFormat;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.print.Doc;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
@@ -90,18 +91,19 @@ public class PlaceholderFactory {
      * </p>
      *
      * @param source 包含填充数据的源对象，必须实现AsposePlaceholder接口
-     * @param templateFile 要填充的模板文件，必须存在且可读
-     * @param outputFile 填充后的输出文件路径，如果父目录不存在会自动创建
+     * @param template 要填充的模板文件，必须存在且可读
      * @return Pair对象，key为模板记录文件，value为输出文件
      * @param <T> 模板数据类型，必须实现AsposePlaceholder接口
      * @throws IllegalArgumentException 如果任何参数为null
      * @throws DocumentException 如果模板填充过程中发生错误
      */
-    public <T extends TemplateInterface> Pair<File, File> fillTemplate(T source, File templateFile, File outputFile) {
-        Pair<File, File> pair = fillTemplate(source, templateFile);
-        FileUtil.copy(pair.getValue(), outputFile, false);
-        pair.setValue(outputFile);
-        return pair;
+    public <T extends TemplateInterface> Pair<File, File> fillTemplate(T source, File template, DocumentFormat currentType) {
+
+        File record = FileUtils.getTemporaryFile(DocumentFormat.DOCX);
+
+        File current = FileUtils.getTemporaryFile(currentType);
+
+        return fillTemplate(source, template, record, current, currentType);
     }
 
     /**
@@ -109,12 +111,12 @@ public class PlaceholderFactory {
      * <p>
      * 该方法是模板填充的核心方法，它执行以下步骤：
      * <ol>
-     *   <li>创建临时文件用于存储处理结果</li>
-     *   <li>加载模板文档</li>
-     *   <li>并行执行各种占位符填充策略</li>
-     *   <li>保存填充后的文档</li>
-     *   <li>清除未替换的变量</li>
-     *   <li>生成最终文档</li>
+     * <li>创建临时文件用于存储处理结果</li>
+     * <li>加载模板文档</li>
+     * <li>并行执行各种占位符填充策略</li>
+     * <li>保存填充后的文档</li>
+     * <li>清除未替换的变量</li>
+     * <li>生成最终文档</li>
      * </ol>
      * </p>
      * <p>
@@ -123,18 +125,15 @@ public class PlaceholderFactory {
      * </p>
      *
      * @param source 包含填充数据的源对象，必须实现AsposePlaceholder接口
-     * @param templateFile 要填充的模板文件，必须存在且可读
+     * @param template 要填充的模板文件，必须存在且可读
+     * @param record 记录, 如果需要多次填充模版，则是模板记录文件
+     * @param current 当前 清空变量的文件
+     * @param currentType 当前类型
      * @return Pair对象，key为模板记录文件，value为清除变量后的文件（可用于后续转换为PDF等格式）
-     * @param <T> 模板数据类型，必须实现AsposePlaceholder接口
-     * @throws IllegalArgumentException 如果任何参数为null
-     * @throws DocumentException 当文档处理过程中发生错误时抛出
      */
-    public <T extends TemplateInterface> Pair<File, File> fillTemplate(T source, File templateFile) {
+    public <T extends TemplateInterface>
+    Pair<File, File> fillTemplate(T source, File template, File record, File current, DocumentFormat currentType) {
 
-        File templateRecord = FileUtils.getTemporaryFile(DocumentFormat.DOCX).toFile();
-
-        // 获取清空变量的文件
-        File clearVariable = FileUtils.getTemporaryFile(DocumentFormat.DOCX).toFile();
 
         // 加载模板并处理
         try {
@@ -143,27 +142,27 @@ public class PlaceholderFactory {
                     .filter(field -> !java.lang.reflect.Modifier.isFinal(field.getModifiers()))
                     .toArray(Field[]::new);
 
-            Document doc = doc(templateFile);
+            Document doc = doc(template);
 
             parallelExecuteStrategy(doc, source);
 
-            doc.save(Files.newOutputStream(templateRecord.toPath()), SaveFormat.DOCX);
+            doc.save(Files.newOutputStream(record.toPath()), SaveFormat.DOCX);
 
-            log.info("模板:{} 文档记录生成成功：{}", templateFile.getName(), templateRecord.getAbsolutePath());
+            log.info("模板:{} 文档记录生成成功：{}", template.getName(), record.getAbsolutePath());
 
             // 清除变量
-            Document docClearVariable = doc(templateRecord);
+            Document docClearVariable = doc(record);
 
             executeClearVariable(fields, docClearVariable, source);
 
-            docClearVariable.save(Files.newOutputStream(clearVariable.toPath()), SaveFormat.DOCX);
+            docClearVariable.save(Files.newOutputStream(current.toPath()), currentType.getValue());
 
-            log.info("模板:{} 文档生成成功：{}", templateFile.getName(), clearVariable.getAbsolutePath());
+            log.info("模板:{} 文档生成成功：{}", template.getName(), current.getAbsolutePath());
 
             // key 作为 docx 模板记录，value 作为 要转换的 PDF 文件
-            return Pair.of(templateRecord, clearVariable);
+            return Pair.of(record, current);
         } catch (Exception e) {
-            log.error("模板:{} 文档生成失败，error：{}", templateFile.getName(), ExceptionUtil.stacktraceToString(e));
+            log.error("模板:{} 文档生成失败，error：{}", template.getName(), ExceptionUtil.stacktraceToString(e));
             throw new DocumentException(e);
         }
     }

@@ -24,6 +24,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.List;
@@ -250,17 +251,17 @@ public class ImagePlaceholderFiller extends AbstractPlaceholderFillerService {
             if (o instanceof byte[]) {
                 byte[] bytes = (byte[]) o;
                 String extension = FileUtils.parseExtension(new Tika().detect(bytes));
-                Path temporaryPath = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(extension));
-                Files.write(temporaryPath, bytes);
-                image = temporaryPath.toFile();
+                File temporaryFile = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(extension));
+                Files.write(Paths.get(temporaryFile.getAbsolutePath()), bytes);
+                image = temporaryFile;
             }
 
             if (o instanceof InputStream) {
                 InputStream inputStream = (InputStream) o;
                 String extension = FileUtils.parseExtension(new Tika().detect(inputStream));
-                Path temporaryPath = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(extension));
-                Files.copy(inputStream, temporaryPath, StandardCopyOption.REPLACE_EXISTING);
-                image = temporaryPath.toFile();
+                File temporaryFile = FileUtils.getTemporaryFile(DocumentFormat.fromExtension(extension));
+                Files.copy(inputStream, Paths.get(temporaryFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+                image = temporaryFile;
             }
 
             if (o instanceof Path) {

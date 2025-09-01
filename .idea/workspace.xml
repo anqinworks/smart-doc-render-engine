@@ -9,12 +9,12 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/entity/RewardReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/entity/RewardReturn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/template/奖励金申报表.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/template/奖励金申报表.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/DefaultFileConvert.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" root0="FORCE_HIGHLIGHTING" />
@@ -78,6 +78,7 @@
     "Maven.smart-doc-render-engine [clean].executor": "Run",
     "Maven.smart-doc-render-engine [compile].executor": "Run",
     "Maven.smart-doc-render-engine [deploy].executor": "Run",
+    "Maven.smart-doc-render-engine [install].executor": "Run",
     "Maven.smart-doc-render-engine [package].executor": "Run",
     "Maven.smart-doc-render-engine [site].executor": "Run",
     "Maven.smart-doc-render-engine [test].executor": "Run",
@@ -111,7 +112,7 @@
     "应用程序.FileDownloader.executor": "Debug",
     "应用程序.FileUtils.executor": "Run",
     "应用程序.PlaceholderFactory.executor": "Debug",
-    "应用程序.Test1.executor": "Debug",
+    "应用程序.Test1.executor": "Run",
     "应用程序.VariableUtils.executor": "Run"
   }
 }]]></component>
@@ -229,7 +230,7 @@
       <workItem from="1756433935198" duration="10571000" />
       <workItem from="1756462930217" duration="1606000" />
       <workItem from="1756693229999" duration="765000" />
-      <workItem from="1756703879979" duration="6915000" />
+      <workItem from="1756703879979" duration="11306000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -311,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756440541543</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1756713983917</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1756713983917</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,9 +355,9 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="38" />
+          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java</url>
+          <line>316</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
