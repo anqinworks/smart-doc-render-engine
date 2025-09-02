@@ -1,11 +1,20 @@
 package cc.anqin.doc.test;
 
 import cc.anqin.doc.FT;
+import cc.anqin.doc.convert.CF;
 import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.test.entity.RewardReturn;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
+import com.aspose.words.Document;
+import com.aspose.words.DocumentBuilder;
+import com.aspose.words.SaveFormat;
+import com.aspose.words.SaveOptions;
+import io.woo.htmltopdf.HtmlToPdf;
+import io.woo.htmltopdf.HtmlToPdfObject;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Arrays;
 
 /**
@@ -64,15 +73,11 @@ public class Test1 {
         File tamplateFile = resource.getFile();
 
         FT<RewardReturn> ft = FT.of(get(), tamplateFile, DocumentFormat.PDF).fer();
-        try {
-            File recordFile = ft.getRecordFile();
+        File recordFile = ft.getRecordFile();
 
-            System.out.println("记录文档生成成功：" + recordFile.getAbsolutePath());
-            File currentFile = ft.getCurrentFile();
+        System.out.println("记录文档生成成功：" + recordFile.getAbsolutePath());
+        File currentFile = ft.getCurrentFile();
 
-            System.out.println("当前文档生成成功：" + currentFile.getAbsolutePath());
-        } finally {
-            ft.clearAll();
-        }
+        System.out.println("当前文档生成成功：" + currentFile.getAbsolutePath());
     }
 }

@@ -45,7 +45,6 @@
 
 
     <dependencies>
-
         <dependency>
             <groupId>cc.anqin</groupId>
             <artifactId>words</artifactId>
@@ -75,6 +74,13 @@
             <groupId>io.github.anqinworks</groupId>
             <artifactId>auto-mapping-map</artifactId>
             <version>${auto-mapping-map.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.woo</groupId>
+            <artifactId>htmltopdf</artifactId>
+            <version>1.0.8</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

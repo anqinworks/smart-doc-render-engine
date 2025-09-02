@@ -43,13 +43,13 @@ public interface FileConverter {
      * 转换过程中会应用字体设置、页面尺寸等配置，确保输出质量。
      * </p>
      *
-     * @param doc 要转换的Aspose文档对象，不能为null
+     * @param inputFile 输入文件对象
      * @param type 目标文件格式，使用DocumentFormat枚举
      * @return 转换后的文件对象，如果转换失败则返回null
      * @throws IllegalArgumentException 如果doc或type为null
      * @throws RuntimeException 如果转换过程中发生错误
      */
-    File convert(Document doc, DocumentFormat type);
+    File convert(File inputFile, DocumentFormat type);
 
 
     /**
@@ -59,13 +59,13 @@ public interface FileConverter {
      * 转换过程中会应用字体设置、页面尺寸等配置，确保输出质量。
      * </p>
      *
-     * @param doc 要转换的Aspose文档对象，不能为null
+     * @param inputFile 输入文件对象
      * @param options 选项
      * @return 转换后的文件对象，如果转换失败则返回null
      *
      */
-    default File convert(Document doc, SaveOptions options) {
-        return convert(doc, DocumentFormat.fromSaveOptions(options));
+    default File convert(File inputFile, SaveOptions options) {
+        return convert(inputFile, DocumentFormat.fromSaveOptions(options));
     }
 
 
@@ -77,7 +77,7 @@ public interface FileConverter {
      * </p>
      *
      * @param outputFile 输出文件路径，指定转换后的文件保存位置
-     * @param doc 要转换的Aspose文档对象，不能为null
+     * @param inputFile 输入的文件对象，不能为null
      * @param width 页面宽度（毫米），用于设置输出文档的页面尺寸
      * @param height 页面高度（毫米），与width配合使用设置页面尺寸
      * @param type 目标文件格式，使用DocumentFormat枚举
@@ -85,7 +85,7 @@ public interface FileConverter {
      * @throws IllegalArgumentException 如果任何参数为null或尺寸参数无效
      * @throws RuntimeException 如果转换过程中发生错误
      */
-    File convert(File outputFile, Document doc, double width, double height, DocumentFormat type);
+    File convert(File outputFile, File inputFile, double width, double height, DocumentFormat type);
 
     /**
      * 获取当前转换器支持的文件类型集合

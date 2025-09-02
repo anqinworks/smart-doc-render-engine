@@ -5,16 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a03e9f52-5595-45ec-8a68-444f798c1830" name="更改" comment="修改部分功能">
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/strategy/HtmlToPDFConvert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/DocumentFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/test/Test1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/PlaceholderFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/ImagePlaceholderFiller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cc/anqin/doc/word/placeholder/PlaceholderFillerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +50,27 @@
     <option name="indexEntireGoPath" value="true" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../Program Files/Java/jdk-17/lib/src.zip!/java.base/java/nio/charset/StandardCharsets.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/BorderCollection.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/CellFormat.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/Document.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/LineStyle.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/LoadFormat.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/LoadOptions.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/NodeCollection.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/Orientation.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/PdfCompliance.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/PdfSaveOptions.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/cc/anqin/words/1.0/words-1.0.jar!/com/aspose/words/Shape.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/com/github/jhonnymertz/java-wkhtmltopdf-wrapper/1.3.1-RELEASE/java-wkhtmltopdf-wrapper-1.3.1-RELEASE.jar!/com/github/jhonnymertz/wkhtmltopdf/wrapper/Pdf.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/com/github/jhonnymertz/java-wkhtmltopdf-wrapper/1.3.1-RELEASE/java-wkhtmltopdf-wrapper-1.3.1-RELEASE.jar!/com/github/jhonnymertz/wkhtmltopdf/wrapper/configurations/WrapperConfig.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/github/anqinworks/auto-mapping-map/3.8/auto-mapping-map-3.8.jar!/cn/hutool/core/io/FileUtil.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/woo/htmltopdf/1.0.8/htmltopdf-1.0.8.jar!/META-INF/MANIFEST.MF" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/woo/htmltopdf/1.0.8/htmltopdf-1.0.8.jar!/io/woo/htmltopdf/HtmlToPdf.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/woo/htmltopdf/1.0.8/htmltopdf-1.0.8.jar!/io/woo/htmltopdf/HtmlToPdfObject.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/woo/htmltopdf/1.0.8/htmltopdf-1.0.8.jar!/io/woo/htmltopdf/PdfPageSize.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/io/woo/htmltopdf/1.0.8/htmltopdf-1.0.8.jar!/io/woo/htmltopdf/WkValue.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar!/com/sun/jna/Pointer.class" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/AbstractFileConverter.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java" root0="SKIP_INSPECTION" />
@@ -82,6 +104,7 @@
     "Maven.smart-doc-render-engine [package].executor": "Run",
     "Maven.smart-doc-render-engine [site].executor": "Run",
     "Maven.smart-doc-render-engine [test].executor": "Run",
+    "Maven.smart-doc-render-engine [verify].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -99,20 +122,23 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
+    "project.structure.last.edited": "模块",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.3",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true",
     "应用程序.AbstractFileConverter.executor": "Debug",
+    "应用程序.AdvancedUrlPdfGenerator.executor": "Run",
     "应用程序.AsposeRegister.executor": "Run",
     "应用程序.DocConverter.executor": "Run",
     "应用程序.DocumentFormat.executor": "Run",
     "应用程序.DocxToPdfConverter.executor": "Run",
     "应用程序.FileDownloader.executor": "Debug",
     "应用程序.FileUtils.executor": "Run",
+    "应用程序.HtmlToPDFConvert.executor": "Run",
     "应用程序.PlaceholderFactory.executor": "Debug",
-    "应用程序.Test1.executor": "Run",
+    "应用程序.Test1.executor": "Debug",
+    "应用程序.UniversalHtmlToPdfConverter.executor": "Run",
     "应用程序.VariableUtils.executor": "Run"
   }
 }]]></component>
@@ -132,25 +158,12 @@
     </key>
   </component>
   <component name="RunManager" selected="应用程序.Test1">
-    <configuration name="AbstractFileConverter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.AbstractFileConverter" />
+    <configuration name="AdvancedUrlPdfGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.strategy.AdvancedUrlPdfGenerator" />
       <module name="smart-doc-render-engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cc.anqin.doc.convert.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DocumentFormat" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.DocumentFormat" />
-      <module name="smart-doc-render-engine" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cc.anqin.doc.convert.*" />
+          <option name="PATTERN" value="cc.anqin.doc.convert.strategy.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -171,12 +184,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlaceholderFactory" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.word.PlaceholderFactory" />
+    <configuration name="HtmlToPDFConvert" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.strategy.HtmlToPDFConvert" />
       <module name="smart-doc-render-engine" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cc.anqin.doc.word.*" />
+          <option name="PATTERN" value="cc.anqin.doc.convert.strategy.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -197,13 +210,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UniversalHtmlToPdfConverter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cc.anqin.doc.convert.strategy.UniversalHtmlToPdfConverter" />
+      <module name="smart-doc-render-engine" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cc.anqin.doc.convert.strategy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="应用程序.Test1" />
+        <item itemvalue="应用程序.HtmlToPDFConvert" />
+        <item itemvalue="应用程序.AdvancedUrlPdfGenerator" />
+        <item itemvalue="应用程序.UniversalHtmlToPdfConverter" />
         <item itemvalue="应用程序.FileUtils" />
-        <item itemvalue="应用程序.DocumentFormat" />
-        <item itemvalue="应用程序.AbstractFileConverter" />
-        <item itemvalue="应用程序.PlaceholderFactory" />
       </list>
     </recent_temporary>
   </component>
@@ -230,7 +256,7 @@
       <workItem from="1756433935198" duration="10571000" />
       <workItem from="1756462930217" duration="1606000" />
       <workItem from="1756693229999" duration="765000" />
-      <workItem from="1756703879979" duration="11306000" />
+      <workItem from="1756703879979" duration="26130000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -320,7 +346,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756713983917</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="修改部分功能">
+      <option name="closed" value="true" />
+      <created>1756718693930</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1756718693930</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -355,9 +389,24 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/FT.java</url>
-          <line>316</line>
-          <option name="timeStamp" value="39" />
+          <url>jar://$MAVEN_REPOSITORY$/com/github/jhonnymertz/java-wkhtmltopdf-wrapper/1.3.1-RELEASE/java-wkhtmltopdf-wrapper-1.3.1-RELEASE.jar!/com/github/jhonnymertz/wkhtmltopdf/wrapper/configurations/WrapperConfig.class</url>
+          <line>34</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/ConverterFileFactory.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/CF.java</url>
+          <line>286</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/cc/anqin/doc/convert/FileConverter.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

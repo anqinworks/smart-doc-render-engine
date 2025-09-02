@@ -13,6 +13,7 @@ import lombok.experimental.Accessors;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 /**
  * 文件转换工具类 - 提供不同格式文件间的转换功能
@@ -55,15 +56,8 @@ import java.io.OutputStream;
 @Accessors(chain = true)
 public class CF {
 
-    /**
-     * 文档对象 - 存储要转换的文档内容
-     * <p>
-     * 该字段存储从输入文件或输入流创建的Aspose Words Document对象，
-     * 是进行文件格式转换的核心数据源。Document对象包含了文档的所有内容、
-     * 格式信息和样式设置。
-     * </p>
-     */
-    private Document document;
+    /** 输入文件 */
+    private File inputFile;
 
     /**
      * 目标输出文件 - 指定转换后的文件保存路径
@@ -81,7 +75,7 @@ public class CF {
      * 系统会根据此字段选择合适的转换策略和保存选项。
      * </p>
      */
-    private DocumentFormat format;
+    private DocumentFormat targetFileType;
 
     /**
      * 宽度 - 输出文件的页面宽度（毫米）
@@ -146,6 +140,7 @@ public class CF {
         return create(FileUtil.file(fileName));
     }
 
+
     /**
      * 创建CF实例（使用默认A4尺寸）
      * <p>
@@ -159,48 +154,25 @@ public class CF {
      * @throws RuntimeException 如果文件加载失败
      */
     public static CF create(File inputFile) {
-        return create(FileUtil.getInputStream(inputFile));
+        return create(inputFile, 210, 297);
     }
 
     /**
      * 创建CF实例（使用默认A4尺寸）
      * <p>
-     * 该静态工厂方法通过输入流创建CF实例，使用默认的A4尺寸设置。
-     * 系统会从输入流创建Aspose Document对象，这是进行后续转换操作的基础。
+     * 该静态工厂方法通过File对象创建CF实例，使用默认的A4尺寸设置。
+     * 系统会从File对象创建输入流，然后调用重载的create方法。
      * </p>
      *
-     * @param inputStream 输入流，包含要转换的文档数据
-     * @return CF实例，已加载指定文档并设置默认尺寸
-     * @throws IllegalArgumentException 如果inputStream为null
-     * @throws RuntimeException 如果Document对象创建失败
+     * @param inputFile 输入文件对象，必须存在且可读
+     * @return CF实例，已加载指定文件并设置默认尺寸
+     * @throws IllegalArgumentException 如果inputFile为null或不存在
+     * @throws RuntimeException 如果文件加载失败
      */
-    public static CF create(InputStream inputStream) {
-        return create(inputStream, 210, 297);
-    }
-
-    /**
-     * 创建CF实例（自定义尺寸）
-     * <p>
-     * 该静态工厂方法通过输入流创建CF实例，并允许用户自定义页面尺寸。
-     * 尺寸参数以毫米为单位，系统会自动转换为相应的点值。
-     * </p>
-     *
-     * @param inputStream 输入流，包含要转换的文档数据
-     * @param width 页面宽度（毫米）
-     * @param height 页面高度（毫米）
-     * @return CF实例，已加载指定文档并设置自定义尺寸
-     * @throws IllegalArgumentException 如果inputStream为null或尺寸参数无效
-     * @throws RuntimeException 如果Document对象创建失败
-     */
-    public static CF create(InputStream inputStream, double width, double height) {
-        try {
-            return new CF()
-                    .setDocument(new Document(inputStream))
-                    .setWidth(width)
-                    .setHeight(height);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public static CF create(File inputFile, double width, double height) {
+        return new CF()
+                .setInputFile(inputFile)
+                .setWidth(width).setHeight(height);
     }
 
     /**
@@ -242,13 +214,13 @@ public class CF {
      * 转换完成后返回转换后的文件对象，如果未指定输出文件，系统会生成临时文件。
      * </p>
      *
-     * @param format 目标文件格式，使用DocumentFormat枚举
+     * @param targetFileType 目标文件格式，使用DocumentFormat枚举
      * @return 转换后的文件对象
      * @throws IllegalArgumentException 如果format为null
      * @throws DocumentException 如果转换过程中发生错误
      */
-    public File toFile(DocumentFormat format) {
-        this.format = format;
+    public File toFile(DocumentFormat targetFileType) {
+        this.targetFileType = targetFileType;
         return execute();
     }
 
@@ -264,7 +236,7 @@ public class CF {
      * @throws DocumentException 如果转换过程中发生错误
      */
     public File toFile(SaveOptions options) {
-        this.format = DocumentFormat.fromSaveOptions(options);
+        this.targetFileType = DocumentFormat.fromSaveOptions(options);
         return execute();
     }
 
@@ -282,9 +254,9 @@ public class CF {
      * @throws RuntimeException 如果转换过程中发生错误
      */
     public <T extends AbstractFileConverter> File toFile(T converter) {
-        this.format = converter.getTargetType();
+        this.targetFileType = converter.getTargetType();
         try {
-            return converter.convert(document, format);
+            return converter.convert(inputFile, targetFileType);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -309,10 +281,11 @@ public class CF {
     private File execute() {
         try {
             if (this.outputFile == null) {
-                this.outputFile = FileUtils.getTemporaryFile(format);
+                this.outputFile = FileUtils.getTemporaryFile(targetFileType);
             }
-            return new DefaultFileConvert()
-                    .convert(this.outputFile, document, this.width, this.height, format);
+
+            return ConverterFileFactory.getConverter(DocumentFormat.fromFile(inputFile), targetFileType)
+                    .convert(this.outputFile, inputFile, this.width, this.height, targetFileType);
         } catch (Exception e) {
             // 转换失败时包装异常并抛出
             throw new DocumentException(e, "文件转换失败");

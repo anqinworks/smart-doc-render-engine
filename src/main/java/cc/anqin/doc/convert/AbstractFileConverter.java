@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 /**
  * 抽象文件转换器
@@ -183,17 +184,8 @@ public abstract class AbstractFileConverter implements FileConverter {
      * </ul>
      * </p>
      * <p>
-     * 使用示例：
-     * <pre>
-     * Document doc = new Document("input.docx");
-     * File result = converter.convert(doc, DocumentFormat.PDF);
-     * if (result != null) {
-     *     System.out.println("转换成功: " + result.getAbsolutePath());
-     * }
-     * </pre>
-     * </p>
      *
-     * @param doc 要转换的Aspose文档对象
+     * @param inputFile 输入文件对象
      * @param type 目标文档格式
      * @return 转换后的文件对象，如果转换失败则返回null
      * @see Document Aspose文档对象
@@ -201,9 +193,9 @@ public abstract class AbstractFileConverter implements FileConverter {
      * @see FileUtils#getTemporaryFile(DocumentFormat) 临时文件工具
      */
     @Override
-    public File convert(Document doc, DocumentFormat type) {
+    public File convert(File inputFile, DocumentFormat type) {
         File temporaryFile = FileUtils.getTemporaryFile(type);
-        return convert(temporaryFile, doc, convertWidth, convertHeight, type);
+        return convert(temporaryFile, inputFile, convertWidth, convertHeight, type);
     }
 
     /**
@@ -223,17 +215,9 @@ public abstract class AbstractFileConverter implements FileConverter {
      *   <li>执行文件保存 - 将文档保存到指定的输出文件</li>
      * </ul>
      * </p>
-     * <p>
-     * 使用示例：
-     * <pre>
-     * Document doc = new Document("input.docx");
-     * File outputFile = new File("output.pdf");
-     * File result = converter.convert(outputFile, doc, 210, 297, DocumentFormat.PDF);
-     * </pre>
-     * </p>
      *
      * @param outputFile 输出文件对象，转换后的文档将保存到此文件
-     * @param doc 要转换的Aspose文档对象
+     * @param inputFile 输入文件对象
      * @param width 目标页面宽度（毫米）
      * @param height 目标页面高度（毫米）
      * @param type 目标文档格式
@@ -244,9 +228,10 @@ public abstract class AbstractFileConverter implements FileConverter {
      * @see SaveOptions Aspose保存选项
      */
     @Override
-    public File convert(File outputFile, Document doc, double width, double height, DocumentFormat type) {
+    public File convert(File outputFile, File inputFile, double width, double height, DocumentFormat type) {
 
         try {
+            Document doc = new Document(FileUtil.getInputStream(inputFile));
             doc.save(FileUtil.getOutputStream(outputFile), defaultSetting(doc, type, width, height));
             return outputFile;
         } catch (Exception e) {
@@ -326,6 +311,14 @@ public abstract class AbstractFileConverter implements FileConverter {
         options.setUseHighQualityRendering(true);
         options.setPrettyFormat(true);
 
+        return options;
+    }
+
+    protected SaveOptions getDefaultDPFOptions(SaveOptions options) {
+        PdfSaveOptions pdfSaveOptions = (PdfSaveOptions) options;
+        pdfSaveOptions.setEmbedFullFonts(true);
+        pdfSaveOptions.setCompliance(PdfCompliance.PDF_17);
+        pdfSaveOptions.setJpegQuality(95);
         return options;
     }
 

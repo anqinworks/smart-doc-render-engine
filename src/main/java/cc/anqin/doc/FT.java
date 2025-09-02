@@ -8,14 +8,12 @@ import cc.anqin.doc.utils.FileUtils;
 import cc.anqin.doc.utils.Pair;
 import cc.anqin.doc.word.PlaceholderFactory;
 import cc.anqin.doc.word.annotation.Placeholder;
-import cn.hutool.core.io.FileUtil;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -268,7 +266,7 @@ public class FT<T extends TemplateInterface> {
      * @throws RuntimeException 如果文件转换过程中发生错误
      */
     public File deleteConvert(DocumentFormat fileType, int width, int height) {
-        File file = CF.create(FileUtil.getInputStream(currentFile), width, height).toFile(fileType);
+        File file = CF.create(currentFile, width, height).toFile(fileType);
         FileUtils.deleteFileSafely(currentFile);
         return currentFile = file;
     }
