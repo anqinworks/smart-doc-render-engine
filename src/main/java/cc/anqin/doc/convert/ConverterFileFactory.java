@@ -1,14 +1,11 @@
 package cc.anqin.doc.convert;
 
 import cc.anqin.doc.convert.strategy.DefaultFileConvert;
-import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.StrUtil;
+import cc.anqin.doc.convert.strategy.HtmlToPDFConvert;
+import cc.anqin.doc.entity.AddOnlySet;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * converter factory
@@ -23,31 +20,20 @@ public class ConverterFileFactory {
 
 
     static {
-        Set<Class<?>> classes = ClassUtil.scanPackageBySuper(null, AbstractFileConverter.class);
-
-        Set<FileConverter> converters = classes.stream()
-                .filter(Objects::nonNull)
-                .map(ConverterFileFactory::createConverterInstance)
-                .collect(Collectors.toSet());
-
-        CONVERTERS = Collections.unmodifiableSet(converters);
+        CONVERTERS = new AddOnlySet<>();
+        register(new HtmlToPDFConvert());
+        register(new DefaultFileConvert());
     }
+
 
     /**
-     * 创建转换器实例
+     * 注册方法
      *
-     * @param clazz 转换器类
-     * @return 转换器实例
-     * @throws RuntimeException 当实例创建失败时抛出
+     * @param converter 转炉
      */
-    private static FileConverter createConverterInstance(Class<?> clazz) {
-        try {
-            return (FileConverter) clazz.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new RuntimeException("创建转换器实例失败: " + clazz.getName(), e);
-        }
+    public static void register(FileConverter converter) {
+        CONVERTERS.add(converter);
     }
-
 
     /**
      * 获取转换器

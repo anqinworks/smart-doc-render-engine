@@ -2,7 +2,11 @@ package cc.anqin.doc.convert.strategy;
 
 import cc.anqin.doc.convert.AbstractFileConverter;
 import cc.anqin.doc.convert.DocumentFormat;
+import cn.hutool.core.io.FileUtil;
+import com.aspose.words.Document;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Set;
 
@@ -85,8 +89,22 @@ import java.util.Set;
  * @see AbstractFileConverter 抽象文件转换器
  * @see DocumentFormat 文档格式枚举
  */
+@Slf4j
 public class DefaultFileConvert extends AbstractFileConverter {
-    
+
+
+    @Override
+    public File convert(File outputFile, File inputFile, double width, double height, DocumentFormat type) {
+        try {
+            Document doc = new Document(FileUtil.getInputStream(inputFile));
+            doc.save(FileUtil.getOutputStream(outputFile), defaultSetting(doc, type, width, height));
+            return outputFile;
+        } catch (Exception e) {
+            log.error("文档转换失败: {}", e.getMessage(), e);
+            throw new RuntimeException("文档转换失败: " + e.getMessage(), e);
+        }
+    }
+
     /**
      * 获取支持的文件类型集合
      * <p>

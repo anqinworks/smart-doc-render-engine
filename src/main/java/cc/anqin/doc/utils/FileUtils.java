@@ -101,7 +101,7 @@ public class FileUtils {
      * @return 创建的临时文件对象
      */
     public File getTemporaryFile(DocumentFormat suffix) {
-        return getTemporaryFile(suffix, "smart-doc");
+        return getTemporaryFile(suffix, "smart-doc-");
     }
 
     /**

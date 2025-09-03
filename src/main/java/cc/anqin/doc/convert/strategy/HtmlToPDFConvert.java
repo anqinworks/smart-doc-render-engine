@@ -5,18 +5,13 @@ import cc.anqin.doc.convert.DocumentFormat;
 import cc.anqin.doc.utils.FileUtils;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
-import com.aspose.words.Document;
+import cn.hutool.core.lang.Assert;
 import io.woo.htmltopdf.HtmlToPdf;
 import io.woo.htmltopdf.HtmlToPdfObject;
 import io.woo.htmltopdf.PdfPageSize;
 import lombok.NoArgsConstructor;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.Set;
 
 /**
@@ -31,21 +26,15 @@ public class HtmlToPDFConvert extends AbstractFileConverter {
 
     @Override
     public File convert(File outputFile, File inputFile, double width, double height, DocumentFormat type) {
-        try {
-            InputStream convert = HtmlToPdf.create()
-                    .pageSize(PdfPageSize.A4)
-                    .object(HtmlToPdfObject
-                            .forHtml(FileUtil.readUtf8String(inputFile)))
-                    .convert();
 
-            File temporaryFile = FileUtils.getTemporaryFile(type);
+        boolean convert = HtmlToPdf.create()
+                .pageSize(PdfPageSize.A4)
+                .object(HtmlToPdfObject.forUrl(inputFile.getAbsolutePath()))
+                .convert(outputFile.getAbsolutePath());
 
-            Files.copy(convert, Paths.get(temporaryFile.getAbsolutePath()), StandardCopyOption.REPLACE_EXISTING);
+        Assert.isTrue(convert, "文档转换失败：" + inputFile.getAbsolutePath());
 
-            return temporaryFile;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return outputFile;
     }
 
 

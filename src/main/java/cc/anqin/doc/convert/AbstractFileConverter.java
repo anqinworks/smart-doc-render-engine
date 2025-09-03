@@ -228,17 +228,7 @@ public abstract class AbstractFileConverter implements FileConverter {
      * @see SaveOptions Aspose保存选项
      */
     @Override
-    public File convert(File outputFile, File inputFile, double width, double height, DocumentFormat type) {
-
-        try {
-            Document doc = new Document(FileUtil.getInputStream(inputFile));
-            doc.save(FileUtil.getOutputStream(outputFile), defaultSetting(doc, type, width, height));
-            return outputFile;
-        } catch (Exception e) {
-            log.error("文档转换失败: {}", e.getMessage(), e);
-            throw new RuntimeException("文档转换失败: " + e.getMessage(), e);
-        }
-    }
+    public abstract File convert(File outputFile, File inputFile, double width, double height, DocumentFormat type);
 
     /**
      * 创建默认的保存选项配置
